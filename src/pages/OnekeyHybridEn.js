@@ -8,6 +8,7 @@ const OnekeyHybridEn = () => {
   const [isFnPressed, setIsFnPressed] = useState(false);
   const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
   const [doubleTapKey, setDoubleTapKey] = useState('');
+  const [keysToPress, setKeysToPress] = useState([]);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -65,9 +66,24 @@ const OnekeyHybridEn = () => {
 
   const nextCharacter = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
-    setCurrentChar(alphabet[randomIndex]);
+    const newChar = alphabet[randomIndex];
+    setCurrentChar(newChar);
     setIsCorrect(null);
     setPressedKey('');
+
+    let keys = [];
+    keyboard.forEach(row => {
+      row.row.forEach(key => {
+        if (key.key === newChar) {
+          keys.push(key.key);
+        } else if (key.FnTap === newChar) {
+          keys.push('Fn', key.key);
+        } else if (key.doubleTap === newChar) {
+          keys.push(key.key, key.key);
+        }
+      });
+    });
+    setKeysToPress(keys);
   }, []);
 
   useEffect(() => {
@@ -106,6 +122,8 @@ const OnekeyHybridEn = () => {
   }, []);
 
   const checkInput = (input) => {
+    if (isCorrect) return; // 이미 정답을 맞췄다면 추가 입력을 무시
+  
     if (input === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
@@ -147,14 +165,29 @@ const OnekeyHybridEn = () => {
     window.history.back();
   };
 
+  const renderKeysToPress = () => {
+    return (
+      <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
+        <h3 className="text-lg font-semibold mb-2">Keys to press in order:</h3>
+        <div className="flex justify-center space-x-2">
+          {keysToPress.map((key, index) => (
+            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white border-2 border-gray-300 rounded-lg text-lg font-bold">
+              {key}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">English Keyboard Practice</h1>
-      <div className={`text-9xl mb-8 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : 'text-gray-800'}`}>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">English Keyboard Practice</h1>
+      <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : 'text-gray-800'}`}>
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">Score: {score}</div>
-      <div className="mb-8 relative" style={{ width: '600px', height: '400px' }}>
+      <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
             {row.row.map((key, keyIndex) => (
@@ -191,7 +224,9 @@ const OnekeyHybridEn = () => {
           </div>
         ))}
       </div>
-      <div className="mt-4 text-gray-600 flex flex-col items-center" style={{ marginTop: '4rem' }}>
+      <div className="my-2"></div>
+      {renderKeysToPress()}
+      <div className="mt-4 text-gray-600 flex flex-col items-center" >
         {isCorrect === false && <p className="mb-2">Incorrect. Please try again.</p>}
         <p>Press the key corresponding to the displayed letter.</p>
       </div>

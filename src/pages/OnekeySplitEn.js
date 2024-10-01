@@ -6,6 +6,7 @@ const OnekeySplitEn = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
+  const [keysToPress, setKeysToPress] = useState([]);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -67,9 +68,19 @@ const OnekeySplitEn = () => {
 
   const nextCharacter = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
-    setCurrentChar(alphabet[randomIndex]);
+    const newChar = alphabet[randomIndex];
+    setCurrentChar(newChar);
     setIsCorrect(null);
     setPressedKey('');
+
+    let keys = [];
+    const doubleTapKey = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+    if (doubleTapKey) {
+      keys = [doubleTapKey, doubleTapKey];
+    } else {
+      keys = [newChar];
+    }
+    setKeysToPress(keys);
   }, []);
 
   const goBack = () => {
@@ -99,12 +110,14 @@ const OnekeySplitEn = () => {
   }, [lastKeyPressTime, currentChar]);
 
   const checkInput = (input) => {
+    if (isCorrect) return; // 이미 정답을 맞췄다면 추가 입력을 무시
+  
     if (input === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
         nextCharacter();
-      }, 500); // Move to next character after 0.5 seconds
+      }, 500);
     } else {
       setIsCorrect(false);
     }
@@ -124,14 +137,29 @@ const OnekeySplitEn = () => {
     }
   });
 
+  const renderKeysToPress = () => {
+    return (
+      <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
+        <h3 className="text-lg font-semibold mb-2">Keys to press in order:</h3>
+        <div className="flex justify-center space-x-2">
+          {keysToPress.map((key, index) => (
+            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white border-2 border-gray-300 rounded-lg text-lg font-bold">
+              {key}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">English Keyboard Practice</h1>
-      <div className={`text-9xl mb-8 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : 'text-gray-800'}`}>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">English Keyboard Practice</h1>
+      <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : 'text-gray-800'}`}>
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">Score: {score}</div>
-      <div className="mb-8 relative" style={{ width: '600px', height: '400px' }}>
+      <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
             {row.row.map((key, keyIndex) => (
@@ -165,7 +193,9 @@ const OnekeySplitEn = () => {
           </div>
         ))}
       </div>
-      <div className="mt-4 text-gray-600 flex flex-col items-center" style={{ marginTop: '4rem' }}>
+      <div className="my-2"></div>
+      {renderKeysToPress()}
+      <div className="mt-4 text-gray-600 flex flex-col items-center" >
         {isCorrect === false && <p className="mb-2">Incorrect. Please try again.</p>}
         <p>Press the key corresponding to the displayed letter.</p>
       </div>

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   const practiceTypes = [
     { name: 'Hybrid Korean', path: '/onekey-hybrid-kr', description: 'Practice Korean with hybrid keyboard' },
-    { name: 'Split Korean', path: '/onekey-split-kr', description: 'Practice Korean with split keyboard' },
+    { name: 'Independent Mode Korean', path: '/onekey-split-kr', description: 'Practice Korean with Independent Mode keyboard' },
     { name: 'Hybrid English', path: '/onekey-hybrid-en', description: 'Practice English with hybrid keyboard' },
-    { name: 'Split English', path: '/onekey-split-en', description: 'Practice English with split keyboard' },
+    { name: 'Independent Mode English', path: '/onekey-split-en', description: 'Practice English with Independent Mode keyboard' },
 
   ];
 

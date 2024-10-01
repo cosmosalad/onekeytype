@@ -8,6 +8,7 @@ const OnekeyHybridKr = () => {
   const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
   const [composingKeys, setComposingKeys] = useState([]);
   const [isConsonant, setIsConsonant] = useState(true);
+  const [keysToPress, setKeysToPress] = useState([]);
   
   const koreanKeyMap = {
     'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
@@ -119,11 +120,26 @@ const OnekeyHybridKr = () => {
   const nextCharacter = useCallback(() => {
     const characters = isConsonant ? consonants : vowels;
     const randomIndex = Math.floor(Math.random() * characters.length);
-    setCurrentChar(characters[randomIndex]);
+    const newChar = characters[randomIndex];
+    setCurrentChar(newChar);
     setIsCorrect(null);
     setPressedKey('');
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
+
+    // 눌러야 할 자판 설정
+    if (vowelComponents[newChar]) {
+      setKeysToPress(vowelComponents[newChar]);
+    } else if (Object.values(doubleTapMap).includes(newChar)) {
+      const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+      setKeysToPress([keyToPress, keyToPress]);
+    } else if (Object.values(doubleConsonantMap).includes(newChar)) {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(['Shift', keyToPress.toLowerCase()]);
+    } else {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(keyToPress ? [keyToPress] : []);
+    }
   }, [isConsonant]);
 
   const goBack = () => {
@@ -161,9 +177,10 @@ const OnekeyHybridKr = () => {
   }, [koreanKeyMap, lastKeyPressTime, currentChar, composingKeys]);
 
   const checkInput = (input, keys) => {
+    if (isCorrect) return;
+  
     let composed = input;
     
-    // 복합 모음 처리를 위한 로직 개선
     if (keys.length > 1) {
       for (let i = keys.length; i > 1; i--) {
         const subComposed = composedVowels[keys.slice(-i).join('')];
@@ -179,13 +196,12 @@ const OnekeyHybridKr = () => {
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
         nextCharacter();
-      }, 500); // 0.5초 후에 다음 문제로 넘어감
-      setComposingKeys([]); // 입력이 맞으면 composingKeys 초기화
+      }, 500);
+      setComposingKeys([]);
     } else {
       setIsCorrect(false);
-      // 복합 모음이 완성되었지만 현재 문제와 다른 경우
       if (composed !== input && composedVowels[keys.join('')]) {
-        setComposingKeys([]); // 복합 모음이 완성되면 composingKeys 초기화
+        setComposingKeys([]);
       }
     }
   };
@@ -212,14 +228,29 @@ const OnekeyHybridKr = () => {
     }
   });
 
+  const renderKeysToPress = () => {
+    return (
+      <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
+        <h3 className="text-lg font-semibold mb-2">눌러야 할 자판 순서:</h3>
+        <div className="flex justify-center space-x-2">
+          {keysToPress.map((key, index) => (
+            <div key={index} className="w-12 h-12 flex items-center justify-center bg-white border-2 border-gray-300 rounded-lg text-lg font-bold">
+              {key in koreanKeyMap ? koreanKeyMap[key] : key}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">한글 키보드 자리 연습</h1>
-      <div className={`text-9xl mb-8 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : ''}`}>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 키보드 자리 연습</h1>
+      <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : ''}`}>
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">점수: {score}</div>
-      <div className="mb-8 relative" style={{ width: '600px', height: '400px' }}>
+      <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
             {row.row.map((key, keyIndex) => (
@@ -256,8 +287,10 @@ const OnekeyHybridKr = () => {
           </div>
         ))}
       </div>
-      <p className="mt-4 text-gray-600 flex flex-col items-center" style={{ marginTop: '4rem' }}>
-        {isCorrect === false ? '틀렸습니다. 다시 시도해주세요.' : '화면에 표시된 한글 자모음에 해당하는 키를 눌러주세요.'}
+      <div className="my-2"></div>
+      {renderKeysToPress()}
+      <p className="mt-4 text-gray-600 flex flex-col items-center" >
+        {isCorrect === false ? '틀렸습니다. 다시 시도해주세요. 천지인 문제시 자음을 눌러 주세요.' : '화면에 표시된 한글 자모음에 해당하는 키를 눌러주세요.'}
       </p>
       <div className="mt-2 text-sm text-gray-500">
         타이핑: {composedVowels[composingKeys.join('')] || composingKeys[composingKeys.length - 1] || ''}
@@ -265,7 +298,7 @@ const OnekeyHybridKr = () => {
       <button onClick={goBack}
           className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
           Go Back
-        </button>
+      </button>
     </div>
   );
 };
