@@ -1,7 +1,7 @@
 @font-face {
   font-family: "PretendardVariable";
   font-weight: normal;
-  src: url("../assets/font/PretendardVariable.ttf") format("truetype");
+  src: url("/assets/font/PretendardVariable.ttf") format("truetype");
 }
 
 body {
