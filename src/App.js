@@ -5,6 +5,7 @@ import OnekeyHybridEn from './pages/OnekeyHybridEn';
 import OnekeyHybridKr from './pages/OnekeyHybridKr';
 import OnekeySplitEn from './pages/OnekeySplitEn';
 import OnekeySplitKr from './pages/OnekeySplitKr';
+import TypingPractice from './pages/TypingPractice';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/onekey-hybrid-kr" element={<OnekeyHybridKr />} />
         <Route path="/onekey-split-en" element={<OnekeySplitEn />} />
         <Route path="/onekey-split-kr" element={<OnekeySplitKr />} />
+        <Route path="/typing-practice" element={<TypingPractice />} />
       </Routes>
     </BrowserRouter>
   );
