@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import keyboardLayout from '../data/layout/Hybrid English.json';
 
 const OnekeyHybridEn = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -9,60 +10,11 @@ const OnekeyHybridEn = () => {
   const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
   const [doubleTapKey, setDoubleTapKey] = useState('');
   const [keysToPress, setKeysToPress] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  const keyboard = [
-    {
-      row: [
-        { key: '1', x: 1, y: 0.5, bottomRight: '6', FnTap: '6' },
-        { key: '2', x: 2, y: 0.25, bottomRight: '7', FnTap: '7' },
-        { key: '3', x: 3, y: 0, bottomRight: '8', FnTap: '8' },
-        { key: '4', x: 4, y: 0.25, bottomRight: '9', FnTap: '9' },
-        { key: '5', x: 5, y: 0.5, bottomRight: '0', FnTap: '0' },
-      ]
-    },
-    {
-      row: [
-        { key: '넘패드', x: 0, y: -0.5 },
-        { key: 'Q', x: 1, y: 1, topRight: 'V', doubleTap: 'V', bottomRight: 'Y', FnTap: 'Y'},
-        { key: 'W', x: 2, y: 0.75, bottomRight: 'U', FnTap: 'U'},
-        { key: 'D', x: 3, y: 0.5, bottomRight: 'I', FnTap: 'I' },
-        { key: 'R', x: 4, y: 0.75, topRight: 'Z', doubleTap: 'Z', bottomRight: 'O', FnTap: 'O'},
-        { key: 'G', x: 5, y: 1, bottomRight: '-', FnTap: '-' },
-        { key: 'Back\nSpace', x: 6, y: 0, bottomRight: '~', FnTap: '~', fontSize: '18px' }
-      ]
-    },
-    {
-      row: [
-        { key: 'Alt', x: 0, y: 0 },
-        { key: 'S', x: 1, y: 1.5, bottomRight: 'H', FnTap: 'H' },
-        { key: 'L', x: 2, y: 1.25, bottomRight: 'J', FnTap: 'J' },
-        { key: 'ㆍ', x: 3, y: 1, bottomRight: 'K', FnTap: 'K' },
-        { key: 'M', x: 4, y: 1.25, bottomRight: 'P', FnTap: 'P' },
-        { key: 'T', x: 5, y: 1.5, bottomRight: '=', FnTap: '=' },
-        { key: '기타', x: 6, y: 0.5, bottomRight: '[ ]', FnTap: '[' },
-      ]
-    },
-    {
-      row: [
-        { key: '.', x: 0, y: 0.5 },
-        { key: 'X', x: 1, y: 2, bottomRight: 'B', FnTap: 'B' },
-        { key: 'E', x: 2, y: 1.75, bottomRight: 'N', FnTap: 'N' },
-        { key: 'A', x: 3, y: 1.5, bottomRight: ':', FnTap: ':' },
-        { key: 'F', x: 4, y: 1.75, bottomRight: '"', FnTap: '"' },
-        { key: 'C', x: 5, y: 2, bottomRight: '?', FnTap: '?' },
-        { key: 'Enter', x: 6, y: 1, bottomRight: '/', FnTap: '/', fontSize: '20px' },
-      ]
-    },
-    {
-      row: [
-        { key: 'Space\n\nFn', x: 0.35, y: 2.8, rotate: -30, height: 1.5, fontSize: '20px'  },
-        { key: 'Shift', x: 1.45, y: 2.9, rotate: -15, fontSize: '20px' },
-        { key: 'Ctrl', x: 2.5, y: 2.5, fontSize: '20px' },
-      ]
-    }
-  ];
+  const keyboard = keyboardLayout;
 
   const nextCharacter = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
@@ -122,7 +74,7 @@ const OnekeyHybridEn = () => {
   }, []);
 
   const checkInput = (input) => {
-    if (isCorrect) return; // 이미 정답을 맞췄다면 추가 입력을 무시
+    if (isCorrect) return;
   
     if (input === currentChar) {
       setIsCorrect(true);
@@ -180,6 +132,29 @@ const OnekeyHybridEn = () => {
     );
   };
 
+  const getKeyContent = (key) => {
+    if (showDetails) {
+      if (key.key === 'Space\n\nFn') {
+        return '탭1: Space\n\n홀드:Fn';
+      }
+      if (key.key === '. ,') {
+        return '탭1: .\n탭2: ,';
+      }
+      let content = `탭1: ${key.key}\n`;
+      if (key.doubleTap) {
+        content += `탭2: ${key.doubleTap}\n`;
+      }
+      if (key.FnTap) {
+        content += `Fn: ${key.bottomRight}\n`;
+      }
+      if (key.doubleConsonant) {
+        content += `Shift: ${key.doubleConsonant}`;
+      }
+      return content.trim();
+    }
+    return key.key;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">English Keyboard Practice</h1>
@@ -187,6 +162,12 @@ const OnekeyHybridEn = () => {
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">Score: {score}</div>
+      <button 
+        onClick={() => setShowDetails(!showDetails)} 
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        {showDetails ? '간단히 보기' : '자세히 보기'}
+      </button>
       <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
@@ -209,16 +190,20 @@ const OnekeyHybridEn = () => {
                 <div 
                   className="font-bold text-center" 
                   style={{ 
-                    fontSize: key.fontSize || '24px',
+                    fontSize: showDetails ? '18px' : (key.fontSize || '35px'),
                     whiteSpace: 'pre-line',
                     lineHeight: '1.2',
                   }}>
-                  {key.key}
+                  {getKeyContent(key)}
                 </div>
-                {key.topRight && 
-                 <div className="text-sm absolute top-1 right-1 text-gray-500">{key.topRight}</div>}
-                {key.bottomRight && 
-                 <div className="text-lg absolute bottom-1 right-1 text-gray-500">{key.bottomRight}</div>}
+                {!showDetails && (
+                  <>
+                    {key.topRight && 
+                     <div className="text-sm absolute top-1 right-1 text-gray-500">{key.topRight}</div>}
+                    {key.bottomRight && 
+                     <div className="text-lg absolute bottom-1 right-1 text-gray-500">{key.bottomRight}</div>}
+                  </>
+                )}
               </div>
             ))}
           </div>

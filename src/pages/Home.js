@@ -10,7 +10,7 @@ const Home = () => {
   ];
 
   const regularTyping = {
-    name: 'Regular Typing Practice',
+    name: 'Typing Practice',
     path: '/typing-practice',
     description: 'Practice typing in English or Korean with various texts'
   };
@@ -52,7 +52,7 @@ const Home = () => {
         <ul className="text-left list-disc list-inside">
           <li>Choose a practice mode from the options above</li>
           <li>Type the character or text shown on the screen</li>
-          <li>Use Fn key or double tap when necessary (for Onekey modes)</li>
+          <li>Use Fn key or double tap when necessary</li>
           <li>Try to increase your score and typing speed</li>
         </ul>
       </div>

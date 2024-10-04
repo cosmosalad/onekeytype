@@ -1,0 +1,51 @@
+[
+  {
+    "row": [
+      { "key": "ESC", "x": 1, "y": 0.5, "fontSize": "20px" },
+      { "key": "Alt", "x": 2, "y": 0.25, "fontSize": "20px" },
+      { "key": "G", "x": 3, "y": 0, "topRight": "Q", "doubleTap": "Q" },
+      { "key": "V", "x": 4, "y": 0.25, "topRight": "Z", "doubleTap": "Z" },
+      { "key": "F", "x": 5, "y": 0.5 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "기타", "x": 0, "y": -0.5 },
+      { "key": "R", "x": 1, "y": 1, "topRight": "P", "doubleTap": "P" },
+      { "key": "H", "x": 2, "y": 0.75, "topRight": "B", "doubleTap": "B" },
+      { "key": "N", "x": 3, "y": 0.5 },
+      { "key": "T", "x": 4, "y": 0.75 },
+      { "key": "S", "x": 5, "y": 1 },
+      { "key": "Back\nSpace", "x": 6, "y": 0, "fontSize": "18px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "영문", "x": 0, "y": 0 },
+      { "key": "U", "x": 1, "y": 1.5, "topRight": "C", "doubleTap": "C" },
+      { "key": "A", "x": 2, "y": 1.25 },
+      { "key": "E", "x": 3, "y": 1 },
+      { "key": "O", "x": 4, "y": 1.25 },
+      { "key": "I", "x": 5, "y": 1.5, "topRight": "J", "doubleTap": "J" },
+      { "key": ". ,", "x": 6, "y": 0.5 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "한글", "x": 0, "y": 0.5 },
+      { "key": "D", "x": 1, "y": 2, "topRight": "K", "doubleTap": "K" },
+      { "key": "W", "x": 2, "y": 1.75, "topRight": "X", "doubleTap": "X" },
+      { "key": "Y", "x": 3, "y": 1.5 },
+      { "key": "L", "x": 4, "y": 1.75 },
+      { "key": "M", "x": 5, "y": 2, "topRight": "?" },
+      { "key": "Enter", "x": 6, "y": 1, "fontSize": "20px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Space", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
+      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
+      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "20px" }
+    ]
+  }
+]

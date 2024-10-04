@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import keyboardLayout from '../data/layout/Split English.json';
 
 const OnekeySplitEn = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -7,6 +8,7 @@ const OnekeySplitEn = () => {
   const [score, setScore] = useState(0);
   const [lastKeyPressTime, setLastKeyPressTime] = useState(0);
   const [keysToPress, setKeysToPress] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -14,57 +16,7 @@ const OnekeySplitEn = () => {
     'G': 'Q', 'V': 'Z', 'R': 'P', 'H': 'B', 'U': 'C', 'I': 'J', 'D': 'K', 'W': 'X'
   };
 
-  const keyboard = [
-    {
-      row: [
-        { key: 'ESC', x: 1, y: 0.5, fontSize: '20px' },
-        { key: 'Alt', x: 2, y: 0.25, fontSize: '20px' },
-        { key: 'G', x: 3, y: 0, topRight: 'Q', doubleTap: 'Q' },
-        { key: 'V', x: 4, y: 0.25, topRight: 'Z', doubleTap: 'Z' },
-        { key: 'F', x: 5, y: 0.5 },
-      ]
-    },
-    {
-      row: [
-        { key: '기타', x: 0, y: -0.5 },
-        { key: 'R', x: 1, y: 1, topRight: 'P', doubleTap: 'P' },
-        { key: 'H', x: 2, y: 0.75, topRight: 'B', doubleTap: 'B' },
-        { key: 'N', x: 3, y: 0.5 },
-        { key: 'T', x: 4, y: 0.75 },
-        { key: 'S', x: 5, y: 1 },
-        { key: 'Back\nSpace', x: 6, y: 0, fontSize: '18px' }
-      ]
-    },
-    {
-      row: [
-        { key: '영문', x: 0, y: 0 },
-        { key: 'U', x: 1, y: 1.5, topRight: 'C', doubleTap: 'C' },
-        { key: 'A', x: 2, y: 1.25 },
-        { key: 'E', x: 3, y: 1 },
-        { key: 'O', x: 4, y: 1.25 },
-        { key: 'I', x: 5, y: 1.5, topRight: 'J', doubleTap: 'J' },
-        { key: '.', x: 6, y: 0.5 },
-      ]
-    },
-    {
-      row: [
-        { key: '한글', x: 0, y: 0.5 },
-        { key: 'D', x: 1, y: 2, topRight: 'K', doubleTap: 'K' },
-        { key: 'W', x: 2, y: 1.75, topRight: 'X', doubleTap: 'X' },
-        { key: 'Y', x: 3, y: 1.5 },
-        { key: 'L', x: 4, y: 1.75 },
-        { key: 'M', x: 5, y: 2, topRight: '?' },
-        { key: 'Enter', x: 6, y: 1, fontSize: '20px' },
-      ]
-    },
-    {
-      row: [
-        { key: 'Space', x: 0.35, y: 2.8, rotate: -30, height: 1.5, fontSize: '20px'  },
-        { key: 'Shift', x: 1.45, y: 2.9, rotate: -15, fontSize: '20px' },
-        { key: 'Ctrl', x: 2.5, y: 2.5, fontSize: '20px' },
-      ]
-    }
-  ];
+  const keyboard = keyboardLayout;
 
   const nextCharacter = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
@@ -110,7 +62,7 @@ const OnekeySplitEn = () => {
   }, [lastKeyPressTime, currentChar]);
 
   const checkInput = (input) => {
-    if (isCorrect) return; // 이미 정답을 맞췄다면 추가 입력을 무시
+    if (isCorrect) return;
   
     if (input === currentChar) {
       setIsCorrect(true);
@@ -137,6 +89,20 @@ const OnekeySplitEn = () => {
     }
   });
 
+  const getKeyContent = (key) => {
+    if (showDetails) {
+      if (key.key === '. ,') {
+        return '탭1: .\n탭2: ,';
+      }
+      let content = `탭1: ${key.key}\n`;
+      if (doubleTapMap[key.key]) {
+        content += `탭2: ${doubleTapMap[key.key]}\n`;
+      }
+      return content.trim();
+    }
+    return key.key;
+  };
+
   const renderKeysToPress = () => {
     return (
       <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
@@ -159,6 +125,12 @@ const OnekeySplitEn = () => {
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">Score: {score}</div>
+      <button 
+        onClick={() => setShowDetails(!showDetails)} 
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        {showDetails ? '간단히 보기' : '자세히 보기'}
+      </button>
       <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
@@ -180,13 +152,13 @@ const OnekeySplitEn = () => {
                 <div 
                   className="font-bold text-center" 
                   style={{ 
-                    fontSize: key.fontSize || '24px',
+                    fontSize: showDetails ? '18px' : (key.fontSize || '35px'),
                     whiteSpace: 'pre-line',
                     lineHeight: '1.2',
                   }}>
-                  {key.key}
+                  {getKeyContent(key)}
                 </div>
-                {key.topRight && 
+                {!showDetails && key.topRight && 
                  <div className="text-sm absolute top-1 right-1 text-gray-500">{key.topRight}</div>}
               </div>
             ))}

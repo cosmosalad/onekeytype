@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import KeyboardLayout from './KeyboardLayout';
 
 const TypingPractice = () => {
   const navigate = useNavigate();
@@ -11,12 +12,9 @@ const TypingPractice = () => {
   const [cpm, setCpm] = useState(0);
   const [currentLineIndex, setCurrentLineIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [finalCpm, setFinalCpm] = useState(0);
-  
-  const lastKeyPressTime = useRef(null);
-  const keyPressCount = useRef(0);
-  const cpmHistory = useRef([]);
-  const intervalRef = useRef(null);
+  const [showKeyboardOptions, setShowKeyboardOptions] = useState(false);
+  const [currentLayout, setCurrentLayout] = useState('');
+  const [showKeyboard, setShowKeyboard] = useState(false);
 
   useEffect(() => {
     if (language) {
@@ -26,54 +24,65 @@ const TypingPractice = () => {
     }
   }, [language]);
 
+  const countKoreanCharacters = useCallback((text) => {
+    let count = 0;
+    for (let i = 0; i < text.length; i++) {
+      const charCode = text.charCodeAt(i);
+      if (charCode >= 0xAC00 && charCode <= 0xD7A3) {
+        const syllableCode = charCode - 0xAC00;
+        const jong = syllableCode % 28;
+        count += jong === 0 ? 2 : 3;
+      } else if ((charCode >= 0x3131 && charCode <= 0x314E) || (charCode >= 0x314F && charCode <= 0x3163)) {
+        count += 1;
+      } else {
+        count += 1;
+      }
+    }
+    return count;
+  }, []);
+
   const calculateCPM = useCallback(() => {
-    const now = Date.now();
-    const timeElapsed = (now - startTime) / 60000;
+    if (startTime && selectedText) {
+      const now = Date.now();
+      const timeElapsed = (now - startTime) / 60000; // 분 단위
+      let totalCharacters = 0;
 
-    if (timeElapsed > 0) {
-      const currentCpm = Math.round(keyPressCount.current / timeElapsed);
-      cpmHistory.current.push(currentCpm);
-      
-      const recentCpm = cpmHistory.current.slice(-5);
-      const averageCpm = Math.round(recentCpm.reduce((a, b) => a + b, 0) / recentCpm.length);
-
-      if (now - lastKeyPressTime.current > 1000) {
-        return Math.max(0, averageCpm - 1);
+      if (language === 'kr') {
+        for (let i = 0; i < currentLineIndex; i++) {
+          totalCharacters += countKoreanCharacters(selectedText.text[i]);
+        }
+        totalCharacters += countKoreanCharacters(userInput);
+      } else {
+        totalCharacters = selectedText.text.slice(0, currentLineIndex).join('').length + userInput.length;
       }
 
-      return averageCpm;
+      return Math.round(totalCharacters / timeElapsed);
     }
     return 0;
-  }, [startTime]);
+  }, [startTime, selectedText, currentLineIndex, userInput, language, countKoreanCharacters]);
 
   useEffect(() => {
-    if (!isCompleted && startTime) {
-      intervalRef.current = setInterval(() => {
+    if (startTime && !isCompleted) {
+      const interval = setInterval(() => {
         setCpm(calculateCPM());
       }, 100);
-      return () => clearInterval(intervalRef.current);
+      return () => clearInterval(interval);
     }
-  }, [calculateCPM, isCompleted, startTime]);
+  }, [calculateCPM, startTime, isCompleted]);
 
   const resetPractice = useCallback(() => {
     setUserInput('');
     setCurrentLineIndex(0);
     setIsCompleted(false);
-    keyPressCount.current = 0;
-    cpmHistory.current = [];
     setStartTime(null);
     setCpm(0);
-    setFinalCpm(0);
-    lastKeyPressTime.current = null;
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-    }
   }, []);
 
   const handleLanguageSelect = useCallback((lang) => {
     setLanguage(lang);
     setSelectedText(null);
     resetPractice();
+    setCurrentLayout(lang === 'en' ? 'Hybrid English' : 'Hybrid Korean');
   }, [resetPractice]);
 
   const handleTextSelect = useCallback((text) => {
@@ -83,12 +92,10 @@ const TypingPractice = () => {
 
   const handleInputChange = useCallback((e) => {
     const input = e.target.value;
-    if (input.length === 1 && !startTime) {
+    if (!startTime) {
       setStartTime(Date.now());
     }
     setUserInput(input);
-    keyPressCount.current += 1;
-    lastKeyPressTime.current = Date.now();
   }, [startTime]);
 
   const findCurrentWordBoundaries = useCallback((text, cursorIndex) => {
@@ -148,22 +155,21 @@ const TypingPractice = () => {
         setUserInput('');
       } else {
         setIsCompleted(true);
-        setFinalCpm(cpm);
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
       }
       return true;
     }
     return false;
-  }, [userInput, selectedText, currentLineIndex, cpm]);
+  }, [userInput, selectedText, currentLineIndex]);
 
   const handleKeyDown = useCallback((e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || (e.key === ' ' && userInput === selectedText.text[currentLineIndex])) {
       e.preventDefault();
       checkLineCompletion();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setUserInput('');
     }
-  }, [checkLineCompletion]);
+  }, [checkLineCompletion, userInput, selectedText, currentLineIndex]);
 
   const handleGoBack = useCallback(() => {
     if (selectedText) {
@@ -177,10 +183,46 @@ const TypingPractice = () => {
     }
   }, [selectedText, language, resetPractice, navigate]);
 
+  const toggleKeyboardOptions = () => {
+    setShowKeyboardOptions(!showKeyboardOptions);
+    if (showKeyboardOptions) {
+      // 키보드 옵션을 숨길 때 키보드도 함께 숨깁니다
+      setShowKeyboard(false);
+      setCurrentLayout('');
+    }
+  };
+
+  const changeLayout = (layout) => {
+    setCurrentLayout(layout);
+    setShowKeyboard(layout !== '');
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">Typing Practice</h1>
-
+      <div className="absolute top-4 left-4 flex items-center">
+        <button
+          onClick={toggleKeyboardOptions}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors mr-4"
+        >
+          {showKeyboardOptions ? 'Hide Keyboard' : 'Show Keyboard'}
+        </button>
+        {showKeyboardOptions && (
+          <select
+            value={currentLayout}
+            onChange={(e) => changeLayout(e.target.value)}
+            className="px-2 py-1 border border-gray-300 rounded"
+          >
+            <option value="">Select Layout</option>
+            <option value="Hybrid English">Hybrid English</option>
+            <option value="Hybrid Korean">Hybrid Korean</option>
+            <option value="Split English">Split English</option>
+            <option value="Split Korean">Split Korean</option>
+          </select>
+        )}
+      </div>
+      
+      {showKeyboard && currentLayout && <KeyboardLayout layout={currentLayout} />}
+      <div className="h-20"></div>
       {!language && (
         <>
           <div className="mb-6 space-x-4">
@@ -244,7 +286,7 @@ const TypingPractice = () => {
       {isCompleted && (
         <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg text-center">
           <h2 className="text-3xl font-bold mb-4 text-gray-800">수고하셨습니다!</h2>
-          <p className="text-2xl mb-6">최종 타이핑 속도: {finalCpm} CPM</p>
+          <p className="text-2xl mb-6">최종 타이핑 속도: {cpm} CPM</p>
           <button
             onClick={handleGoBack}
             className="px-6 py-2 bg-blue-500 text-white rounded shadow text-lg transition duration-300 ease-in-out hover:scale-105 active:scale-95"

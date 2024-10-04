@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import keyboardLayout from '../data/layout/Split Korean.json';
 
 const OnekeySplitKr = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -9,6 +10,7 @@ const OnekeySplitKr = () => {
   const [composingKeys, setComposingKeys] = useState([]);
   const [isConsonant, setIsConsonant] = useState(true);
   const [keysToPress, setKeysToPress] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
   
   const koreanKeyMap = {
     'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
@@ -65,57 +67,7 @@ const OnekeySplitKr = () => {
   const consonants = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
   const vowels = 'ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖ';
 
-  const keyboard = [
-    {
-      row: [
-        { key: 'ESC', x: 1, y: 0.5, fontSize: '20px' },
-        { key: 'Alt', x: 2, y: 0.25, fontSize: '20px' },
-        { key: ';', x: 3, y: 0 },
-        { key: '"', x: 4, y: 0.25 },
-        { key: '-', x: 5, y: 0.5 },
-      ]
-    },
-    {
-      row: [
-        { key: '기타', x: 0, y: -0.5 },
-        { key: 'ㅂ', x: 1, y: 1, topRight: 'ㅍ', doubleTap: 'ㅍ', doubleConsonant: 'ㅃ' },
-        { key: 'ㅈ', x: 2, y: 0.75, topRight: 'ㅊ', doubleTap: 'ㅊ', doubleConsonant: 'ㅉ' },
-        { key: 'ㅇ', x: 3, y: 0.5 },
-        { key: 'ㄱ', x: 4, y: 0.75, topRight: 'ㅋ', doubleTap: 'ㅋ', doubleConsonant: 'ㄲ' },
-        { key: 'ㅎ', x: 5, y: 1 },
-        { key: 'Back Space', x: 6, y: 0, fontSize: '18px' }
-      ]
-    },
-    {
-      row: [
-        { key: '영문', x: 0, y: 0 },
-        { key: 'ㄴ', x: 1, y: 1.5 },
-        { key: 'ㅣ', x: 2, y: 1.25, cheonjin: true },
-        { key: 'ㆍ', x: 3, y: 1, cheonjin: true },
-        { key: 'ㅡ', x: 4, y: 1.25, cheonjin: true },
-        { key: 'ㅅ', x: 5, y: 1.5, doubleConsonant: 'ㅆ' },
-        { key: '.', x: 6, y: 0.5 },
-      ]
-    },
-    {
-      row: [
-        { key: '한글', x: 0, y: 0.5 },
-        { key: 'ㅌ', x: 1, y: 2 },
-        { key: 'ㄷ', x: 2, y: 1.75, doubleConsonant: 'ㄸ' },
-        { key: 'ㅁ', x: 3, y: 1.5 },
-        { key: 'ㄹ', x: 4, y: 1.75 },
-        { key: '?', x: 5, y: 2 },
-        { key: 'Enter', x: 6, y: 1, fontSize: '12px' },
-      ]
-    },
-    {
-      row: [
-        { key: 'Space', x: 0.35, y: 2.8, rotate: -30, height: 1.5, fontSize: '20px'  },
-        { key: 'Shift', x: 1.45, y: 2.9, rotate: -15, fontSize: '20px' },
-        { key: 'Ctrl', x: 2.5, y: 2.5, fontSize: '20px' },
-      ]
-    }
-  ];
+  const keyboard = keyboardLayout;
 
   const nextCharacter = useCallback(() => {
     const characters = isConsonant ? consonants : vowels;
@@ -127,7 +79,6 @@ const OnekeySplitKr = () => {
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
 
-  // 눌러야 할 자판 설정
   if (vowelComponents[newChar]) {
     setKeysToPress(vowelComponents[newChar]);
   } else if (Object.values(doubleTapMap).includes(newChar)) {
@@ -228,6 +179,23 @@ const OnekeySplitKr = () => {
     }
   });
 
+  const getKeyContent = (key) => {
+    if (showDetails) {
+      if (key.key === '. ,') {
+        return '탭1: .\n탭2: ,';
+      }
+      let content = `탭1: ${key.key}\n`;
+      if (doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]) {
+        content += `탭2: ${doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      }
+      if (doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]) {
+        content += `Shift: ${doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      }
+      return content.trim();
+    }
+    return key.key;
+  };
+
   const renderKeysToPress = () => {
     return (
       <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
@@ -250,6 +218,12 @@ const OnekeySplitKr = () => {
         {currentChar}
       </div>
       <div className="text-2xl mb-4 text-gray-700">점수: {score}</div>
+      <button 
+        onClick={() => setShowDetails(!showDetails)} 
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        {showDetails ? '간단히 보기' : '자세히 보기'}
+      </button>
       <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
           <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
@@ -271,17 +245,21 @@ const OnekeySplitKr = () => {
                 <div 
                   className="font-bold text-center" 
                   style={{ 
-                    fontSize: key.fontSize || '24px',
+                    fontSize: showDetails ? '18px' : (key.fontSize || '35px'),
                     whiteSpace: 'pre-line',
                     lineHeight: '1.2',
                   }}
                 >
-                  {key.key}
+                  {getKeyContent(key)}
                 </div>
-                {koreanKeyMap[key.key.toUpperCase()] && 
-                 <div className="text-[8px] absolute top-0 left-0">{koreanKeyMap[key.key.toUpperCase()]}</div>}
-                {key.topRight && 
-                 <div className="text-[16px] absolute top-0 right-0">{key.topRight}</div>}
+                {!showDetails && (
+                  <>
+                    {koreanKeyMap[key.key.toUpperCase()] && 
+                     <div className="text-[8px] absolute top-0 left-0">{koreanKeyMap[key.key.toUpperCase()]}</div>}
+                    {key.topRight && 
+                     <div className="text-[16px] absolute top-0 right-0">{key.topRight}</div>}
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -297,7 +275,7 @@ const OnekeySplitKr = () => {
       </div>
       <button onClick={goBack}
         className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-        Go Back
+        뒤로 가기
       </button>
     </div>
   );
