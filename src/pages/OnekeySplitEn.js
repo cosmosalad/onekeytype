@@ -13,7 +13,7 @@ const OnekeySplitEn = () => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   const doubleTapMap = {
-    'G': 'Q', 'V': 'Z', 'R': 'P', 'H': 'B', 'U': 'C', 'I': 'J', 'D': 'K', 'W': 'X'
+    'G': 'Q', 'V': 'Z', 'R': 'P', 'H': 'B', 'U': 'C', 'I': 'J', 'D': 'K', 'W': 'X', 'M': '/', 'Y': ';', 'L': '"'
   };
 
   const keyboard = keyboardLayout;

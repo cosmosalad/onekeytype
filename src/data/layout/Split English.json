@@ -35,9 +35,9 @@
       { "key": "한글", "x": 0, "y": 0.5 },
       { "key": "D", "x": 1, "y": 2, "topRight": "K", "doubleTap": "K" },
       { "key": "W", "x": 2, "y": 1.75, "topRight": "X", "doubleTap": "X" },
-      { "key": "Y", "x": 3, "y": 1.5 },
-      { "key": "L", "x": 4, "y": 1.75 },
-      { "key": "M", "x": 5, "y": 2, "topRight": "?" },
+      { "key": "Y", "x": 3, "y": 1.5, "topRight": ";", "doubleTap": ";" },
+      { "key": "L", "x": 4, "y": 1.75, "topRight": "'", "doubleTap": "'" },
+      { "key": "M", "x": 5, "y": 2, "topRight": "/", "doubleTap": "/" },
       { "key": "Enter", "x": 6, "y": 1, "fontSize": "20px" }
     ]
   },

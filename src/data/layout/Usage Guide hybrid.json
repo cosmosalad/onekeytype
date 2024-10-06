@@ -1,0 +1,168 @@
+[
+  {
+    "row": [
+      { "key": "1", "shift": "!", "x": 1, "y": 0.5, "bottomRight": "6", "FnTap": "6" },
+      { "key": "2", "shift": "@", "x": 2, "y": 0.25, "bottomRight": "7", "FnTap": "7" },
+      { "key": "3", "shift": "#", "x": 3, "y": 0, "bottomRight": "8", "FnTap": "8" },
+      { "key": "4", "shift": "$", "x": 4, "y": 0.25, "bottomRight": "9", "FnTap": "9" },
+      { "key": "5", "shift": "%", "x": 5, "y": 0.5, "bottomRight": "0", "FnTap": "0" },
+
+
+      { "key": "1", "x": 9, "y": 0.5, "bottomRight": "6", "FnTap": "6", "fnsft": "^" },
+      { "key": "2", "x": 10, "y": 0.25, "bottomRight": "7", "FnTap": "7", "fnsft": "&" },
+      { "key": "3", "x": 11, "y": 0, "bottomRight": "8", "FnTap": "8", "fnsft": "*" },
+      { "key": "4", "x": 12, "y": 0.25, "bottomRight": "9", "FnTap": "9", "fnsft": "(" },
+      { "key": "5", "x": 13, "y": 0.5, "bottomRight": "0", "FnTap": "0", "fnsft": ")" },
+
+
+      { "key": "/", "x": 17, "y": 0.5 },
+      { "key": "*", "x": 18, "y": 0.25 },
+      { "key": "-", "x": 19, "y": 0 },
+      { "key": "+", "x": 20, "y": 0.25 },
+      { "key": "Num Lock", "x": 21, "y": 0.5, "fontSize": "28px" },
+
+
+      { "key": "F1", "x": 25, "y": 0.5 },
+      { "key": "F2", "x": 26, "y": 0.25 },
+      { "key": "F3", "x": 27, "y": 0 },
+      { "key": "F4", "x": 28, "y": 0.25 },
+      { "key": "F5", "x": 29, "y": 0.5 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "넘패드", "x": 0, "y": -0.5, "fontSize": "25px" },
+      { "key": "ㅂ", "x": 1, "y": 1, "topRight": "ㅍ", "doubleTap": "ㅍ", "doubleConsonant": "ㅃ" },
+      { "key": "ㅈ", "x": 2, "y": 0.75, "doubleConsonant": "ㅉ" },
+      { "key": "ㅇ", "x": 3, "y": 0.5 },
+      { "key": "ㄱ", "x": 4, "y": 0.75, "topRight": "ㅋ", "doubleTap": "ㅋ", "doubleConsonant": "ㄲ" },
+      { "key": "ㅎ", "x": 5, "y": 1 },
+      { "key": "Back\nSpace", "x": 6, "y": 0, "fontSize": "25px" },
+
+
+      { "key": "넘패드", "x": 8, "y": -0.5, "fontSize": "25px", "bottomRight": "ESC", "FnTap": "ESC" },
+      { "key": "Q", "x": 9, "y": 1, "topRight": "V", "doubleTap": "V", "bottomRight": "Y", "FnTap": "Y" },
+      { "key": "W", "x": 10, "y": 0.75, "bottomRight": "U", "FnTap": "U"},
+      { "key": "D", "x": 11, "y": 0.5, "bottomRight": "I", "FnTap": "I" },
+      { "key": "R", "x": 12, "y": 0.75, "topRight": "Z", "doubleTap": "Z", "bottomRight": "O", "FnTap": "O" },
+      { "key": "G", "x": 13, "y": 1, "bottomRight": "-", "FnTap": "-" },
+      { "key": "Back\nSpace", "x": 14, "y": 0, "fontSize": "25px" },
+
+
+      { "key": "영/한", "x": 16, "y": -0.5 },
+      { "key": "", "x": 17, "y": 1 },
+      { "key": "7", "x": 18, "y": 0.75, "NumLock": "Home" },
+      { "key": "8", "x": 19, "y": 0.5, "NumLock": "↑" },
+      { "key": "9", "x": 20, "y": 0.75, "NumLock": "PgUp" },
+      { "key": "", "x": 21, "y": 1 },
+      { "key": "Back\nSpace", "x": 22, "y": 0, "fontSize": "18px" },
+
+
+      { "key": "", "x": 24, "y": -0.5 },
+      { "key": "F6", "x": 25, "y": 1 },
+      { "key": "F7", "x": 26, "y": 0.75 },
+      { "key": "F8", "x": 27, "y": 0.5 },
+      { "key": "F9", "x": 28, "y": 0.75 },
+      { "key": "F10", "x": 29, "y": 1 },
+      { "key": "", "x": 30, "y": 0 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Alt", "x": 0, "y": 0, "fontSize": "20px" },
+      { "key": "ㄴ", "x": 1, "y": 1.5 },
+      { "key": "ㅣ", "x": 2, "y": 1.25, "cheonjin": true },
+      { "key": "ㆍ", "x": 3, "y": 1, "cheonjin": true },
+      { "key": "ㅡ", "x": 4, "y": 1.25, "cheonjin": true },
+      { "key": "ㅅ", "x": 5, "y": 1.5, "doubleConsonant": "ㅆ" },
+      { "key": "기타", "x": 6, "y": 0.5 },
+
+
+      { "key": "Alt", "x": 8, "y": 0, "bottomRight": "Tab", "FnTap": "Tab" },
+      { "key": "S", "x": 9, "y": 1.5, "bottomRight": "H", "FnTap": "H" },
+      { "key": "L", "x": 10, "y": 1.25, "bottomRight": "J", "FnTap": "J" },
+      { "key": "ㆍ", "x": 11, "y": 1, "bottomRight": "K", "FnTap": "K" },
+      { "key": "M", "x": 12, "y": 1.25, "bottomRight": "P", "FnTap": "P" },
+      { "key": "T", "x": 13, "y": 1.5, "bottomRight": "=", "FnTap": "=" },
+      { "key": "기타", "x": 14, "y": 0.5, "bottomRight": "[", "FnTap": "[", "fndoubleTap": "]" },
+
+
+      { "key": "Tab", "x": 16, "y": 0 },
+      { "key": "", "x": 17, "y": 1.5 },
+      { "key": "4", "x": 18, "y": 1.25, "NumLock": "←" },
+      { "key": "5", "x": 19, "y": 1 },
+      { "key": "6", "x": 20, "y": 1.25, "NumLock": "→" },
+      { "key": "", "x": 21, "y": 1.5 },
+      { "key": "", "x": 22, "y": 0.5 },
+
+
+      { "key": "", "x": 24, "y": 0},
+      { "key": "F11", "x": 25, "y": 1.5 },
+      { "key": "F12", "x": 26, "y": 1.25 },
+      { "key": "Ins", "x": 27, "y": 1, "fontSize": "28px" },
+      { "key": "Home", "x": 28, "y": 1.25, "fontSize": "28px" },
+      { "key": "PgUp", "x": 29, "y": 1.5, "fontSize": "28px" },
+      { "key": "", "x": 30, "y": 0.5 }
+    ]
+  },
+  {
+    "row": [
+      { "key": ". ,", "x": 0, "y": 0.5 },
+      { "key": "ㅌ", "x": 1, "y": 2 },
+      { "key": "ㄷ", "x": 2, "y": 1.75, "doubleConsonant": "ㄸ" },
+      { "key": "ㅁ", "x": 3, "y": 1.5 },
+      { "key": "ㄹ", "x": 4, "y": 1.75 },
+      { "key": "ㅊ", "x": 5, "y": 2 },
+      { "key": "Enter", "x": 6, "y": 1, "fontSize": "30px" },
+
+
+      { "key": ".", "x": 8, "y": 0.5, "bottomRight": "C-L", "FnTap": "Caps Lock" },
+      { "key": "X", "x": 9, "y": 2, "bottomRight": "B", "FnTap": "B" },
+      { "key": "E", "x": 10, "y": 1.75, "bottomRight": "N", "FnTap": "N" },
+      { "key": "A", "x": 11, "y": 1.5, "bottomRight": ":", "FnTap": ":" },
+      { "key": "F", "x": 12, "y": 1.75, "bottomRight": "\"", "FnTap": "\"" },
+      { "key": "C", "x": 13, "y": 2, "bottomRight": "/", "FnTap": "/" },
+      { "key": "Enter", "x": 14, "y": 1, "bottomRight": "₩", "FnTap": "₩", "fontSize": "30px" },
+
+
+      { "key": "Alt", "x": 16, "y": 0.5 },
+      { "key": "0", "x": 17, "y": 2, "NumLock": "Ins" },
+      { "key": "1", "x": 18, "y": 1.75, "NumLock": "End" },
+      { "key": "2", "x": 19, "y": 1.5, "NumLock": "↓" },
+      { "key": "3", "x": 20, "y": 1.75, "NumLock": "PgDn" },
+      { "key": ".", "x": 21, "y": 2, "NumLock": "Del" },
+      { "key": "Enter", "x": 22, "y": 1, "fontSize": "30px" },
+
+
+      { "key": "", "x": 24, "y": 0.5 },
+      { "key": "", "x": 25, "y": 2 },
+      { "key": "", "x": 26, "y": 1.75 },
+      { "key": "Del", "x": 27, "y": 1.5, "fontSize": "28px" },
+      { "key": "End", "x": 28, "y": 1.75, "fontSize": "28px" },
+      { "key": "PgDn", "x": 29, "y": 2, "fontSize": "28px" },
+      { "key": "", "x": 30, "y": 1 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Space\n\nFn", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
+      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
+      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "20px" },
+
+
+      { "key": "Space\n\nFn", "x": 8.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
+      { "key": "Shift", "x": 9.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
+      { "key": "Ctrl", "x": 10.5, "y": 2.5, "fontSize": "20px" },
+
+
+      { "key": "Space", "x": 16.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
+      { "key": "Shift", "x": 17.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
+      { "key": "Ctrl", "x": 18.5, "y": 2.5, "fontSize": "20px" },
+
+
+      { "key": "", "x": 24.35, "y": 2.8, "rotate": -30, "height": 1.5 },
+      { "key": "", "x": 25.45, "y": 2.9, "rotate": -15 },
+      { "key": "", "x": 26.5, "y": 2.5 }
+    ]
+  }
+]
