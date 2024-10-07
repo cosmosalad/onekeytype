@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import OnekeyHybridEn from './pages/OnekeyHybridEn';
 import OnekeyHybridKr from './pages/OnekeyHybridKr';
@@ -17,9 +17,9 @@ import UsageGuidegearpad from './pages/gearpad/UsageGuidegearpad';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path="/onekeytype" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/onekey_hybrid_en" element={<OnekeyHybridEn />} />
         <Route path="/onekey_hybrid_kr" element={<OnekeyHybridKr />} />
         <Route path="/onekey_split_en" element={<OnekeySplitEn />} />
@@ -34,7 +34,7 @@ function App() {
         <Route path="/gearpad/typingpractice" element={<TypingPractice_gearpad />} />
         <Route path="/gearpad/usageguide" element={<UsageGuidegearpad />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
