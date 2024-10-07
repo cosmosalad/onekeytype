@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import keyboardLayout from '../data/layout/Hybrid English.json';
+import keyboardLayout from '../../data/layout/gearpad/Gearpad English.json';
 
 const OnekeyHybridEn = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -28,9 +28,13 @@ const OnekeyHybridEn = () => {
       row.row.forEach(key => {
         if (key.key === newChar) {
           keys.push(key.key);
-        } else if (key.FnTap === newChar) {
-          keys.push('Fn', key.key);
-        } else if (key.doubleTap === newChar) {
+        } else if (key.FnTap === newChar){
+          keys.push(key.key, key.key);
+        }
+        else if (key.hold === newChar) {
+          keys.push('홀드', key.key);
+        }
+        else if (key.doubleTap === newChar) {
           keys.push(key.key, key.key);
         }
       });
@@ -100,7 +104,7 @@ const OnekeyHybridEn = () => {
   let requiresFn = false;
   keyboard.forEach(row => {
     row.row.forEach(key => {
-      if (key.key === currentChar || key.FnTap === currentChar || key.doubleTap === currentChar) {
+      if (key.key === currentChar || key.hold === currentChar || key.doubleTap === currentChar) {
         highlightKeys.push(key.key);
         if (key.FnTap === currentChar) {
           requiresFn = true;
@@ -119,7 +123,7 @@ const OnekeyHybridEn = () => {
 
   const renderKeysToPress = () => {
     return (
-      <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
+      <div className="mt-24 p-4 bg-gray-100 rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-2">Keys to press in order:</h3>
         <div className="flex justify-center space-x-2">
           {keysToPress.map((key, index) => (
@@ -143,6 +147,9 @@ const OnekeyHybridEn = () => {
       let content = `탭1: ${key.key}\n`;
       if (key.doubleTap) {
         content += `탭2: ${key.doubleTap}\n`;
+      }
+      if (key.hold) {
+        content += `홀드: ${key.hold}\n`;
       }
       if (key.FnTap) {
         content += `Fn: ${key.bottomRight}\n`;
@@ -168,9 +175,9 @@ const OnekeyHybridEn = () => {
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>
-      <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
+      <div className="mb-6 relative" style={{ width: '350px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
-          <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
+          <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 55}px` }}>
             {row.row.map((key, keyIndex) => (
               <div
                 key={keyIndex}
@@ -198,10 +205,10 @@ const OnekeyHybridEn = () => {
                 </div>
                 {!showDetails && (
                   <>
-                    {key.topRight && 
-                     <div className="text-[16px] absolute top-1 right-1">{key.topRight}</div>}
-                    {key.bottomRight && 
-                     <div className="text-[16px] absolute bottom-1 right-1">{key.bottomRight}</div>}
+                    {key.doubleTap && 
+                     <div className="text-[16px] absolute top-0 right-1">{key.doubleTap}</div>}
+                    {key.hold && 
+                     <div className="text-[16px] absolute bottom-0 right-1">{key.hold}</div>}
                   </>
                 )}
               </div>

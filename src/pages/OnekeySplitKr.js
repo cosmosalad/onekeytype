@@ -254,10 +254,8 @@ const OnekeySplitKr = () => {
                 </div>
                 {!showDetails && (
                   <>
-                    {koreanKeyMap[key.key.toUpperCase()] && 
-                     <div className="text-[8px] absolute top-0 left-0">{koreanKeyMap[key.key.toUpperCase()]}</div>}
                     {key.topRight && 
-                     <div className="text-[16px] absolute top-0 right-0">{key.topRight}</div>}
+                     <div className="text-[16px] absolute top-1 right-1">{key.topRight}</div>}
                   </>
                 )}
               </div>

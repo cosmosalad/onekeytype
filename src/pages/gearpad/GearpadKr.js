@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import keyboardLayout from '../data/layout/Hybrid Korean.json';
+import keyboardLayout from '../../data/layout/gearpad/Gearpad Korean.json';
 
 const OnekeyHybridKr = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -20,8 +20,8 @@ const OnekeyHybridKr = () => {
     'O': 'ㅒ', 'P': 'ㅖ'
   };
 
-  const doubleTapMap = {
-    'ㅂ': 'ㅍ', 'ㄱ': 'ㅋ'
+  const doubleTap = {
+    'ㄱ': 'ㅋ', 'ㄴ': 'ㄹ', 'ㄷ': 'ㅌ', 'ㅂ': 'ㅍ', 'ㅅ': 'ㅎ', 'ㅈ': 'ㅊ', 'ㅇ': 'ㅁ'
   };
 
   const doubleConsonantMap = {
@@ -82,12 +82,12 @@ const OnekeyHybridKr = () => {
     // 눌러야 할 자판 설정
     if (vowelComponents[newChar]) {
       setKeysToPress(vowelComponents[newChar]);
-    } else if (Object.values(doubleTapMap).includes(newChar)) {
-      const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+    } else if (Object.values(doubleTap).includes(newChar)) {
+      const keyToPress = Object.keys(doubleTap).find(key => doubleTap[key] === newChar);
       setKeysToPress([keyToPress, keyToPress]);
     } else if (Object.values(doubleConsonantMap).includes(newChar)) {
       const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-      setKeysToPress(['Shift', keyToPress.toLowerCase()]);
+      setKeysToPress(['홀드', keyToPress.toLowerCase()]);
     } else {
       const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
       setKeysToPress(keyToPress ? [keyToPress] : []);
@@ -109,8 +109,8 @@ const OnekeyHybridKr = () => {
     if (koreanKeyMap[key]) {
       let pressedChar = koreanKeyMap[key];
       
-      if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
-        pressedChar = doubleTapMap[pressedChar];
+      if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTap[pressedChar]) {
+        pressedChar = doubleTap[pressedChar];
       }
       
       setPressedKey(pressedChar);
@@ -167,7 +167,7 @@ const OnekeyHybridKr = () => {
 
   const highlightKeys = vowelComponents[currentChar] || [currentChar];
 
-  Object.entries(doubleTapMap).forEach(([key, value]) => {
+  Object.entries(doubleTap).forEach(([key, value]) => {
     if (value === currentChar) {
       highlightKeys.push(key);
     }
@@ -176,15 +176,11 @@ const OnekeyHybridKr = () => {
   Object.entries(doubleConsonantMap).forEach(([key, value]) => {
     if (value === currentChar) {
       highlightKeys.push(key);
-      highlightKeys.push('Shift');
     }
   });
 
   const getKeyContent = (key) => {
     if (showDetails) {
-      if (key.key === 'Space\n\nFn') {
-        return '탭1: Space\n\n홀드:Fn';
-      }
       if (key.key === '. ,') {
         return '탭1: .\n탭2: ,';
       }
@@ -192,11 +188,17 @@ const OnekeyHybridKr = () => {
       if (key.doubleTap) {
         content += `탭2: ${key.doubleTap}\n`;
       }
+      if (key.hold) {
+        content += `홀드: ${key.hold}\n`;
+      }
       if (key.FnTap) {
         content += `Fn: ${key.bottomRight}\n`;
       }
       if (key.doubleConsonant) {
         content += `Shift: ${key.doubleConsonant}`;
+      }
+      if (key.NumLock) {
+        content += `NumL: ${key.NumLock}`;
       }
       return content.trim();
     }
@@ -205,7 +207,7 @@ const OnekeyHybridKr = () => {
   
   const renderKeysToPress = () => {
     return (
-      <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
+      <div className="mt-24 p-4 bg-gray-100 rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-2">눌러야 할 자판 순서:</h3>
         <div className="flex justify-center space-x-2">
           {keysToPress.map((key, index) => (
@@ -220,7 +222,7 @@ const OnekeyHybridKr = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 키보드 자리 연습</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 자판 자리 연습</h1>
       <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : ''}`}>
         {currentChar}
       </div>
@@ -231,9 +233,9 @@ const OnekeyHybridKr = () => {
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>
-      <div className="mb-6 relative" style={{ width: '600px', height: '400px' }}>
+      <div className="mb-6 relative" style={{ width: '350px', height: '400px' }}>
         {keyboard.map((row, rowIndex) => (
-          <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 70}px` }}>
+          <div key={rowIndex} className="absolute" style={{ top: `${rowIndex * 55}px` }}>
             {row.row.map((key, keyIndex) => (
               <div
                 key={keyIndex}
@@ -255,16 +257,15 @@ const OnekeyHybridKr = () => {
                     fontSize: showDetails ? '18px' : (key.fontSize || '35px'),
                     whiteSpace: 'pre-line',
                     lineHeight: '1.2',
-                  }}
-                >
+                  }}>
                   {getKeyContent(key)}
                 </div>
                 {!showDetails && (
                   <>
-                    {key.topRight && 
-                     <div className="text-[16px] absolute top-1 right-1">{key.topRight}</div>}
-                    {key.bottomRight && 
-                     <div className="text-[16px] absolute bottom-1 right-1">{key.bottomRight}</div>}
+                    {key.doubleTap && 
+                     <div className="text-[16px] absolute top-0 right-1">{key.doubleTap}</div>}
+                     {key.hold && 
+                     <div className="text-[16px] absolute bottom-0 right-1">{key.hold}</div>}
                   </>
                 )}
               </div>

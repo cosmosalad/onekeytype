@@ -1,0 +1,47 @@
+[
+  {
+    "row": [
+      { "key": "넘패드", "x": 0, "y": 0, "fontSize": "25px" },
+      { "key": "한글", "x": 1, "y": 0, "fontSize": "25px" },
+      { "key": "영어", "x": 2, "y": 0, "fontSize": "25px" },
+      { "key": "기타", "x": 3, "y": 0, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Q", "x": 0, "y": 1.3, "doubleTap": "Z" },
+      { "key": "A", "x": 1, "y": 1.3, "doubleTap": "B", "hold": "C" },
+      { "key": "D", "x": 2, "y": 1.3, "doubleTap": "E", "hold": "F" },
+      { "key": "Back Space", "x": 3, "y": 1.3, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "G", "x": 0, "y": 2.3, "doubleTap": "H", "hold": "I" },
+      { "key": "J", "x": 1, "y": 2.3, "doubleTap": "K", "hold": "L" },
+      { "key": "M", "x": 2, "y": 2.3, "doubleTap": "N", "hold": "O" },
+      { "key": "Shift", "x": 3, "y": 2.3, "height": 2.065, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "P", "x": 0, "y": 3.3, "doubleTap": "R", "hold": "S" },
+      { "key": "T", "x": 1, "y": 3.3, "doubleTap": "U", "hold": "V" },
+      { "key": "W", "x": 2, "y": 3.3, "doubleTap": "X", "hold": "Y" }
+    ]
+  },
+  {
+    "row": [
+      { "key": ". ,", "x": 0, "y": 4.3 },
+      { "key": "Caps Lock", "x": 1, "y": 4.3, "fontSize": "25px" },
+      { "key": "/", "x": 2, "y": 4.3, "doubleTap": "!" },
+      { "key": "Enter", "x": 3, "y": 4.3, "height": 2.065, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Space", "x": 0, "y": 5.3, "width": 2.05, "fontSize": "25px" },
+      { "key": "Alt", "x": 2, "y": 5.3, "fontSize": "25px" }
+    ]
+  }
+]
