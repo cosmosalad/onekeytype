@@ -66,7 +66,6 @@ const Home = () => {
           <li><a href="https://vial.rocks/" className="text-blue-600 hover:underline">Vial Web</a></li>
         </ul>
       </div>
-      <Link to="/gearpad" style={{ display: 'none' }} />
       <div className="mt-8 text-sm text-gray-600">
         © 2024 <a href="https://github.com/cosmosalad/" className="text-blue-600 hover:underline">cosmosalad</a>. All rights reserved.
       </div>
