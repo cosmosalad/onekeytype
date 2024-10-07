@@ -65,15 +65,8 @@ const Home = () => {
           <li>필요한 경우 더블 탭, 홀드를 사용하세요</li>
           <li><a href="https://vial.rocks/" className="text-blue-600 hover:underline">Vial Web</a></li>
         </ul>
-      <div className="flex justify-center">
-        <Link
-          to="/gearpad/usageguide"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
-        >
-          Usage Guide
-        </Link>
       </div>
-      </div>
+      {false && <Link to="/gearpad" />}
       <div className="mt-8 text-sm text-gray-600">
         © 2024 <a href="https://github.com/cosmosalad/" className="text-blue-600 hover:underline">cosmosalad</a>. All rights reserved.
       </div>
