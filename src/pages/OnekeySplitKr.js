@@ -21,7 +21,7 @@ const OnekeySplitKr = () => {
   };
 
   const doubleTapMap = {
-    'ㅂ': 'ㅍ', 'ㅈ': 'ㅊ', 'ㄱ': 'ㅋ'
+    'ㅁ': ';', 'ㄹ': "'", 'ㅊ': '/', '-': '='
   };
 
   const doubleConsonantMap = {
@@ -185,11 +185,11 @@ const OnekeySplitKr = () => {
         return '탭1: .\n탭2: ,';
       }
       let content = `탭1: ${key.key}\n`;
-      if (doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]) {
-        content += `탭2: ${doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      if (key.doubleTap) {
+        content += `탭2: ${key.doubleTap}\n`;
       }
-      if (doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]) {
-        content += `Shift: ${doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      if (key.doubleConsonant) {
+        content += `Shift: ${key.doubleConsonant}\n`;
       }
       return content.trim();
     }

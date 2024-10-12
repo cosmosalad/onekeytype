@@ -9,12 +9,6 @@ import TypingPractice from './pages/TypingPractice';
 import UsageGuideHybrid from './pages/UsageGuideHybrid';
 import UsageGuideSplit from './pages/UsageGuideSplit';
 
-import Home_gearpad from './pages/gearpad/Home_gearpad';
-import GearpadKr from './pages/gearpad/GearpadKr';
-import GearpadEn from './pages/gearpad/GearpadEn';
-import TypingPractice_gearpad from './pages/gearpad/TypingPractice_gearpad';
-import UsageGuidegearpad from './pages/gearpad/UsageGuidegearpad';
-
 function App() {
   return (
     <BrowserRouter>
@@ -27,12 +21,6 @@ function App() {
         <Route path="/typing_practice" element={<TypingPractice />} />
         <Route path="/usage_guide_hybrid" element={<UsageGuideHybrid />} />
         <Route path="/usage_guide_split" element={<UsageGuideSplit />} />
-
-        <Route path="/gearpad" element={<Home_gearpad />} />
-        <Route path="/gearpad/korean" element={<GearpadKr />} />
-        <Route path="/gearpad/english" element={<GearpadEn />} />
-        <Route path="/gearpad/typingpractice" element={<TypingPractice_gearpad />} />
-        <Route path="/gearpad/usageguide" element={<UsageGuidegearpad />} />
       </Routes>
     </BrowserRouter>
   );

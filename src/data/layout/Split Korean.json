@@ -1,11 +1,11 @@
 [
   {
     "row": [
-      { "key": "ESC", "x": 1, "y": 0.5, "fontSize": "20px" },
-      { "key": "Alt", "x": 2, "y": 0.25, "fontSize": "20px" },
-      { "key": ";", "x": 3, "y": 0 },
-      { "key": "\"", "x": 4, "y": 0.25 },
-      { "key": "-", "x": 5, "y": 0.5 }
+      { "key": "ESC", "x": 1, "y": 0.5, "fontSize": "25px" },
+      { "key": "Alt", "x": 2, "y": 0.25, "fontSize": "25px" },
+      { "key": "ㅍ", "x": 3, "y": 0 },
+      { "key": "ㅋ", "x": 4, "y": 0.25 },
+      { "key": "-", "x": 5, "y": 0.5, "topRight": "=", "doubleTap": "=" }
     ]
   },
   {
@@ -35,17 +35,17 @@
       { "key": "한글", "x": 0, "y": 0.5 },
       { "key": "ㅌ", "x": 1, "y": 2 },
       { "key": "ㄷ", "x": 2, "y": 1.75, "doubleConsonant": "ㄸ" },
-      { "key": "ㅁ", "x": 3, "y": 1.5 },
-      { "key": "ㄹ", "x": 4, "y": 1.75 },
-      { "key": "?", "x": 5, "y": 2 },
-      { "key": "Enter", "x": 6, "y": 1, "fontSize": "12px" }
+      { "key": "ㅁ", "x": 3, "y": 1.5, "topRight": ";", "doubleTap": ";" },
+      { "key": "ㄹ", "x": 4, "y": 1.75, "topRight": "'", "doubleTap": "'" },
+      { "key": "ㅊ", "x": 5, "y": 2, "topRight": "/", "doubleTap": "/" },
+      { "key": "Enter", "x": 6, "y": 1, "fontSize": "25px" }
     ]
   },
   {
     "row": [
-      { "key": "Space", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
-      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
-      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "20px" }
+      { "key": "Space", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "25px" }
     ]
   }
 ]

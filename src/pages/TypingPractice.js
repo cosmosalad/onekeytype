@@ -82,7 +82,8 @@ const TypingPractice = () => {
     setLanguage(lang);
     setSelectedText(null);
     resetPractice();
-    setCurrentLayout(lang === 'en' ? 'Hybrid English' : 'Hybrid Korean');
+    // 현재 레이아웃을 유지
+    setShowKeyboard(true);
   }, [resetPractice]);
 
   const handleTextSelect = useCallback((text) => {
@@ -186,7 +187,7 @@ const TypingPractice = () => {
   const toggleKeyboardOptions = () => {
     setShowKeyboardOptions(!showKeyboardOptions);
     if (showKeyboardOptions) {
-      // 키보드 옵션을 숨길 때 키보드도 함께 숨깁니다
+
       setShowKeyboard(false);
       setCurrentLayout('');
     }

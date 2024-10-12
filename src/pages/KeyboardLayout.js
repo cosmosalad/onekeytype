@@ -46,8 +46,8 @@ const KeyboardLayout = ({ layout }) => {
   return (
     <div className="flex flex-col items-center">
       <button 
-        onClick={() => setShowDetails(!showDetails)} 
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+         onClick={() => setShowDetails(!showDetails)}
+         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>
