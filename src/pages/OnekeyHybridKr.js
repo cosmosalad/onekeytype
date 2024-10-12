@@ -220,7 +220,7 @@ const OnekeyHybridKr = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 키보드 자리 연습</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 자판 자리 연습</h1>
       <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : ''}`}>
         {currentChar}
       </div>

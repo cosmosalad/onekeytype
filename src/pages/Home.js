@@ -4,23 +4,23 @@ import { ReactTyped } from "react-typed";
 
 const Home = () => {
   const practiceTypes = [
-    { name: 'Hybrid Korean', path: '/onekey_hybrid_kr', description: 'Practice Korean with hybrid keyboard' },
-    { name: 'Independent Mode Korean', path: '/onekey_split_kr', description: 'Practice Korean with Independent Mode keyboard' },
-    { name: 'Hybrid English', path: '/onekey_hybrid_en', description: 'Practice English with hybrid keyboard' },
-    { name: 'Independent Mode English', path: '/onekey_split_en', description: 'Practice English with Independent Mode keyboard' },
+    { name: '한글 서브 레이아웃', path: '/onekey_hybrid_kr', description: '한손키보드 한글 레이아웃 자판 연습' },
+    { name: '한글 메인 레이아웃', path: '/onekey_split_kr', description: '한손키보드 한글 레이아웃 자판 연습' },
+    { name: '영문 서브 레이아웃', path: '/onekey_hybrid_en', description: '한손키보드 영어 레이아웃 자판 연습' },
+    { name: '영문 메인 레이아웃', path: '/onekey_split_en', description: '한손키보드 영어 레이아웃 자판 연습' },
   ];
 
   const regularTyping = {
-    name: 'Typing Practice',
+    name: '타이핑 연습',
     path: '/typing_practice',
-    description: 'Practice typing in English or Korean with various texts'
+    description: '다양한 텍스트로 영어 또는 한국어 장문 타이핑 연습'
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
       <h1 className="text-4xl font-bold mb-8 h-16">
         <ReactTyped
-          strings={["Onekey Typing Practice", "원키 타이핑 연습"]}
+          strings={["SKEW : 한손 키보드", "SKEW : Single-handed Keyboard for People with Disabilities"]}
           typeSpeed={40}
           backSpeed={50}
           backDelay={10000}
@@ -70,13 +70,13 @@ const Home = () => {
           to="/usage_guide_hybrid"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
         >
-          Hybrid Usage Guide
+          서브 레이아웃 사용 가이드
         </Link>
         <Link
           to="/usage_guide_split"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
         >
-          Independent Mode Usage Guide
+          메인 레이아웃 사용 가이드
         </Link>
       </div>
       </div>

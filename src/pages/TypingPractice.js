@@ -44,7 +44,7 @@ const TypingPractice = () => {
   const calculateCPM = useCallback(() => {
     if (startTime && selectedText) {
       const now = Date.now();
-      const timeElapsed = (now - startTime) / 60000; // 분 단위
+      const timeElapsed = (now - startTime) / 60000;
       let totalCharacters = 0;
 
       if (language === 'kr') {
@@ -82,7 +82,7 @@ const TypingPractice = () => {
     setLanguage(lang);
     setSelectedText(null);
     resetPractice();
-    // 현재 레이아웃을 유지
+  
     setShowKeyboard(true);
   }, [resetPractice]);
 
@@ -205,7 +205,7 @@ const TypingPractice = () => {
           onClick={toggleKeyboardOptions}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors mr-4"
         >
-          {showKeyboardOptions ? 'Hide Keyboard' : 'Show Keyboard'}
+          {showKeyboardOptions ? '레이아웃 숨기기' : '레이아웃 보이기'}
         </button>
         {showKeyboardOptions && (
           <select
@@ -213,11 +213,11 @@ const TypingPractice = () => {
             onChange={(e) => changeLayout(e.target.value)}
             className="px-2 py-1 border border-gray-300 rounded"
           >
-            <option value="">Select Layout</option>
-            <option value="Hybrid English">Hybrid English</option>
-            <option value="Hybrid Korean">Hybrid Korean</option>
-            <option value="Split English">Split English</option>
-            <option value="Split Korean">Split Korean</option>
+            <option value="">레이아웃 선택</option>
+            <option value="Split Korean">메인 키보드 한글 레이아웃</option>
+            <option value="Split English">메인 키보드 영어 레이아웃</option>
+            <option value="Hybrid Korean">서브 키보드 한글 레이아웃</option>
+            <option value="Hybrid English">서브 키보드 영어 레이아웃</option>
           </select>
         )}
       </div>
@@ -233,14 +233,14 @@ const TypingPractice = () => {
                 onClick={() => handleLanguageSelect(lang)}
                 className="px-8 py-4 bg-white text-blue-800 font-semibold rounded shadow transition duration-300 ease-in-out transform hover:scale-105 active:scale-95" 
                 style={{ fontSize: '30px' }}>
-                {lang === 'en' ? 'English' : 'Korean'}
+                {lang === 'en' ? '영문' : '한글'}
               </button>
             ))}
           </div>
           <button
             onClick={handleGoBack}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-            Go Back to Home
+            홈으로 돌아가기
           </button>
         </>
       )}
@@ -276,7 +276,7 @@ const TypingPractice = () => {
             />
           </div>
           <div className="mt-4 text-xl font-semibold text-gray-800">
-            Current Speed: {cpm} CPM
+            현재 속도: {cpm} CPM
           </div>
           <div className="mt-2 text-lg text-gray-600">
             Line: {currentLineIndex + 1} / {selectedText.text.length}
@@ -292,7 +292,7 @@ const TypingPractice = () => {
             onClick={handleGoBack}
             className="px-6 py-2 bg-blue-500 text-white rounded shadow text-lg transition duration-300 ease-in-out hover:scale-105 active:scale-95"
           >
-            New Practice
+            새로 연습하기
           </button>
         </div>
       )}
@@ -301,7 +301,7 @@ const TypingPractice = () => {
         <button
           onClick={handleGoBack}
           className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-          Go Back
+          뒤로 가기
         </button>
       )}
     </div>

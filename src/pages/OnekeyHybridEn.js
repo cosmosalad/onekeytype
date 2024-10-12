@@ -120,7 +120,7 @@ const OnekeyHybridEn = () => {
   const renderKeysToPress = () => {
     return (
       <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow">
-        <h3 className="text-lg font-semibold mb-2">Keys to press in order:</h3>
+        <h3 className="text-lg font-semibold mb-2">눌러야 할 자판 순서:</h3>
         <div className="flex justify-center space-x-2">
           {keysToPress.map((key, index) => (
             <div key={index} className="w-12 h-12 flex items-center justify-center bg-white border-2 border-gray-300 rounded-lg text-lg font-bold">
@@ -157,11 +157,11 @@ const OnekeyHybridEn = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">English Keyboard Practice</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">영어 자판 자리 연습</h1>
       <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : 'text-gray-800'}`}>
         {currentChar}
       </div>
-      <div className="text-2xl mb-4 text-gray-700">Score: {score}</div>
+      <div className="text-2xl mb-4 text-gray-700">점수: {score}</div>
       <button 
         onClick={() => setShowDetails(!showDetails)} 
         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
@@ -212,12 +212,13 @@ const OnekeyHybridEn = () => {
       <div className="my-2"></div>
       {renderKeysToPress()}
       <div className="mt-4 text-gray-600 flex flex-col items-center" >
-        {isCorrect === false && <p className="mb-2">Incorrect. Please try again.</p>}
-        <p>Press the key corresponding to the displayed letter.</p>
+        <p className="mt-4 text-gray-600 flex flex-col items-center" >
+          {isCorrect === false ? '틀렸습니다. 다시 시도해 주세요.' : '화면에 표시된 글자에 해당하는 키를 눌러주세요.'}
+        </p>
       </div>
       <button onClick={goBack}
         className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-        Go Back
+        뒤로 가기
       </button>
     </div>
   );

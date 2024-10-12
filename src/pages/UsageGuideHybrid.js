@@ -44,7 +44,7 @@ const OnekeyHybridEn = () => {
   return (
     <div className="min-h-screen bg-blue-100 flex flex-col justify-center">
       <div className="p-4" style={{ width: '2630px' }}>
-        <h1 className="text-3xl font-bold mb-6 text-gray-800">OneKey Hybrid Usage Guide</h1>
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">서브 레이아웃 사용 가이드</h1>
         <button
           onClick={() => setShowDetails(!showDetails)}
           className="mb-20 px-4 py-2 bg-blue-500 text-white rounded"
@@ -105,7 +105,10 @@ const OnekeyHybridEn = () => {
         </div>
         <div className="mt-32 text-lg text-gray-700">
           <h2 className="font-bold mb-2">키보드 섹션 설명:</h2>
-          <ul>탭1: 키를 한번 눌러주세요, 탭2: 키를 두번 눌러주세요, 홀: 키를 길게 눌러주세요, NumL: 넘버패드 모드를 변경합니다
+          <ul>모음은 천지인 방식을 [ㅣ(인)ㆍ(아래아)ㅡ(지)]사용합니다.'ㅣㆍ' = 'ㅏ', 'ㆍㅣ' = 'ㅓ', 'ㆍㅡ' = 'ㅗ', 'ㅡㆍ' = 'ㅜ', <br/>
+            'ㅡㆍㆍ' = 'ㅠ', 'ㅣㆍㆍ' = 'ㅑ', 'ㆍㆍㅡ' = 'ㅛ', 'ㆍㆍㅣ' = 'ㅕ', 
+            'ㅣㆍㅣ' = 'ㅐ', 'ㆍㅣㅣ' = 'ㅔ', 'ㅣㆍㆍㅣ' = 'ㅒ','ㆍㆍㅣㅣ' = 'ㅖ', 'ㅡㆍㆍㅣ' = 'ㅝ', 'ㅡㆍㆍㅣㅣ' = 'ㅞ'<br/>
+            탭1: 키를 한번 눌러주세요, 탭2: 키를 두번 눌러주세요, 홀: 키를 길게 눌러주세요, NumL: 넘버패드 모드를 변경합니다
             {keyboardSections.map((section, index) => (
               <li key={index}><strong>{section.name}:</strong> {section.description}</li>
             ))}
@@ -113,7 +116,7 @@ const OnekeyHybridEn = () => {
         </div>
         <button onClick={goBack}
           className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-          Go Back
+          뒤로 가기
         </button>
       </div>
     </div>
