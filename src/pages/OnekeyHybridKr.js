@@ -79,7 +79,6 @@ const OnekeyHybridKr = () => {
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
 
-    // 눌러야 할 자판 설정
     if (vowelComponents[newChar]) {
       setKeysToPress(vowelComponents[newChar]);
     } else if (Object.values(doubleTapMap).includes(newChar)) {
@@ -103,19 +102,25 @@ const OnekeyHybridKr = () => {
   }, []);
 
   const handleKeyPress = useCallback((event) => {
-    const key = event.key;
+    const key = event.key.toLowerCase();
     const currentTime = new Date().getTime();
-    
-    if (koreanKeyMap[key]) {
-      let pressedChar = koreanKeyMap[key];
-      
-      if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
+    const isShiftPressed = event.shiftKey;
+
+    let pressedChar;
+    if (isShiftPressed && koreanKeyMap[event.key]) {
+      pressedChar = koreanKeyMap[event.key];
+    } else if (koreanKeyMap[key]) {
+      pressedChar = koreanKeyMap[key];
+    }
+
+    if (pressedChar) {
+      if (!isShiftPressed && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
         pressedChar = doubleTapMap[pressedChar];
       }
-      
+
       setPressedKey(pressedChar);
       setLastKeyPressTime(currentTime);
-      
+
       const newComposingKeys = [...composingKeys, pressedChar];
       setComposingKeys(newComposingKeys);
       checkInput(pressedChar, newComposingKeys);
@@ -123,16 +128,16 @@ const OnekeyHybridKr = () => {
       const cheonjinChar = Object.values(cheonjinMap).find(item => item.key === key.toUpperCase()).char;
       const newComposingKeys = [...composingKeys, cheonjinChar];
       setComposingKeys(newComposingKeys);
-      
+
       checkInput(cheonjinChar, newComposingKeys);
     }
   }, [koreanKeyMap, lastKeyPressTime, currentChar, composingKeys]);
 
   const checkInput = (input, keys) => {
     if (isCorrect) return;
-  
+
     let composed = input;
-    
+
     if (keys.length > 1) {
       for (let i = keys.length; i > 1; i--) {
         const subComposed = composedVowels[keys.slice(-i).join('')];
@@ -142,8 +147,8 @@ const OnekeyHybridKr = () => {
         }
       }
     }
-    
-    if (composed === currentChar) {
+
+    if (composed === currentChar || keys.join('') === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
@@ -152,8 +157,8 @@ const OnekeyHybridKr = () => {
       setComposingKeys([]);
     } else {
       setIsCorrect(false);
-      if (composed !== input && composedVowels[keys.join('')]) {
-        setComposingKeys([]);
+      if (composed !== input && !composedVowels[keys.join('')]) {
+        setComposingKeys(keys);
       }
     }
   };

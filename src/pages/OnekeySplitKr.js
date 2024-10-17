@@ -21,7 +21,7 @@ const OnekeySplitKr = () => {
   };
 
   const doubleTapMap = {
-    'ㅁ': ';', 'ㄹ': "'", 'ㅊ': '/'
+    'ㅁ': ';', 'ㄹ': "'", 'ㅊ': '/', '-': '='
   };
 
   const doubleConsonantMap = {
@@ -79,19 +79,19 @@ const OnekeySplitKr = () => {
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
 
-  if (vowelComponents[newChar]) {
-    setKeysToPress(vowelComponents[newChar]);
-  } else if (Object.values(doubleTapMap).includes(newChar)) {
-    const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
-    setKeysToPress([keyToPress, keyToPress]);
-  } else if (Object.values(doubleConsonantMap).includes(newChar)) {
-    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-    setKeysToPress(['Shift', keyToPress.toLowerCase()]);
-  } else {
-    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-    setKeysToPress(keyToPress ? [keyToPress] : []);
-  }
-}, [isConsonant]);
+    if (vowelComponents[newChar]) {
+      setKeysToPress(vowelComponents[newChar]);
+    } else if (Object.values(doubleTapMap).includes(newChar)) {
+      const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+      setKeysToPress([keyToPress, keyToPress]);
+    } else if (Object.values(doubleConsonantMap).includes(newChar)) {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(['Shift', keyToPress.toLowerCase()]);
+    } else {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(keyToPress ? [keyToPress] : []);
+    }
+  }, [isConsonant]);
 
   const goBack = () => {
     window.history.back();
@@ -102,13 +102,19 @@ const OnekeySplitKr = () => {
   }, []);
 
   const handleKeyPress = useCallback((event) => {
-    const key = event.key;
+    const key = event.key.toLowerCase();
     const currentTime = new Date().getTime();
+    const isShiftPressed = event.shiftKey;
 
-    if (koreanKeyMap[key]) {
-      let pressedChar = koreanKeyMap[key];
+    let pressedChar;
+    if (isShiftPressed && koreanKeyMap[event.key]) {
+      pressedChar = koreanKeyMap[event.key];
+    } else if (koreanKeyMap[key]) {
+      pressedChar = koreanKeyMap[key];
+    }
 
-      if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
+    if (pressedChar) {
+      if (!isShiftPressed && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
         pressedChar = doubleTapMap[pressedChar];
       }
 
@@ -142,7 +148,7 @@ const OnekeySplitKr = () => {
       }
     }
 
-    if (composed === currentChar) {
+    if (composed === currentChar || keys.join('') === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
@@ -185,11 +191,11 @@ const OnekeySplitKr = () => {
         return '탭1: .\n탭2: ,';
       }
       let content = `탭1: ${key.key}\n`;
-      if (doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]) {
-        content += `탭2: ${doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      if (key.doubleTap) {
+        content += `탭2: ${key.doubleTap}\n`;
       }
-      if (doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]) {
-        content += `Shift: ${doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
+      if (key.doubleConsonant) {
+        content += `Shift: ${key.doubleConsonant}`;
       }
       return content.trim();
     }

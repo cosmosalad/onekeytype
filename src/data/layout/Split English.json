@@ -5,7 +5,7 @@
       { "key": "Alt", "x": 2, "y": 0.25, "fontSize": "20px" },
       { "key": "G", "x": 3, "y": 0, "topRight": "Q", "doubleTap": "Q" },
       { "key": "V", "x": 4, "y": 0.25, "topRight": "Z", "doubleTap": "Z" },
-      { "key": "F", "x": 5, "y": 0.5 }
+      { "key": "-", "x": 5, "y": 0.5, "topRight": "=", "doubleTap": "=" }
     ]
   },
   {
@@ -13,7 +13,7 @@
       { "key": "기타", "x": 0, "y": -0.5 },
       { "key": "R", "x": 1, "y": 1, "topRight": "P", "doubleTap": "P" },
       { "key": "H", "x": 2, "y": 0.75, "topRight": "B", "doubleTap": "B" },
-      { "key": "N", "x": 3, "y": 0.5 },
+      { "key": "N", "x": 3, "y": 0.5, "topRight": "F", "doubleTap": "F" },
       { "key": "T", "x": 4, "y": 0.75 },
       { "key": "S", "x": 5, "y": 1 },
       { "key": "Back\nSpace", "x": 6, "y": 0, "fontSize": "18px" }
