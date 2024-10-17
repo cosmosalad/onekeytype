@@ -11,7 +11,8 @@ const OnekeySplitKr = () => {
   const [isConsonant, setIsConsonant] = useState(true);
   const [keysToPress, setKeysToPress] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-  
+  const [currentInput, setCurrentInput] = useState('');
+
   const koreanKeyMap = {
     'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
     'a': 'ㅁ', 's': 'ㄴ', 'd': 'ㅇ', 'f': 'ㄹ', 'g': 'ㅎ', 'h': 'ㅗ', 'j': 'ㅓ', 'k': 'ㅏ', 'l': 'ㅣ',
@@ -79,81 +80,85 @@ const OnekeySplitKr = () => {
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
 
-  if (vowelComponents[newChar]) {
-    setKeysToPress(vowelComponents[newChar]);
-  } else if (Object.values(doubleTapMap).includes(newChar)) {
-    const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
-    setKeysToPress([keyToPress, keyToPress]);
-  } else if (Object.values(doubleConsonantMap).includes(newChar)) {
-    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-    setKeysToPress(['Shift', keyToPress.toLowerCase()]);
-  } else {
-    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-    setKeysToPress(keyToPress ? [keyToPress] : []);
-  }
-}, [isConsonant]);
-  
+    if (vowelComponents[newChar]) {
+      setKeysToPress(vowelComponents[newChar]);
+    } else if (Object.values(doubleTapMap).includes(newChar)) {
+      const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+      setKeysToPress([keyToPress, keyToPress]);
+    } else if (Object.values(doubleConsonantMap).includes(newChar)) {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(['Shift', keyToPress.toLowerCase()]);
+    } else {
+      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+      setKeysToPress(keyToPress ? [keyToPress] : []);
+    }
+  }, [isConsonant]);
+
   const goBack = () => {
     window.history.back();
   };
 
   useEffect(() => {
     nextCharacter();
-  }, []);
+  }, [nextCharacter]);
 
   const handleKeyPress = useCallback((event) => {
     const key = event.key;
     const currentTime = new Date().getTime();
     
+    let pressedChar = '';
+
     if (koreanKeyMap[key]) {
-      let pressedChar = koreanKeyMap[key];
+      pressedChar = koreanKeyMap[key];
       
       if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
         pressedChar = doubleTapMap[pressedChar];
       }
       
+      if (event.shiftKey && doubleConsonantMap[pressedChar]) {
+        pressedChar = doubleConsonantMap[pressedChar];
+      }
+    } else if (Object.values(cheonjinMap).some(item => item.key === key.toUpperCase())) {
+      pressedChar = Object.values(cheonjinMap).find(item => item.key === key.toUpperCase()).char;
+    }
+
+    if (pressedChar) {
       setPressedKey(pressedChar);
       setLastKeyPressTime(currentTime);
       
       const newComposingKeys = [...composingKeys, pressedChar];
       setComposingKeys(newComposingKeys);
-      checkInput(pressedChar, newComposingKeys);
-    } else if (Object.values(cheonjinMap).some(item => item.key === key.toUpperCase())) {
-      const cheonjinChar = Object.values(cheonjinMap).find(item => item.key === key.toUpperCase()).char;
-      const newComposingKeys = [...composingKeys, cheonjinChar];
-      setComposingKeys(newComposingKeys);
+
+      let composedChar = composeCharacter(newComposingKeys);
+      setCurrentInput(prevInput => prevInput + composedChar);
       
-      checkInput(cheonjinChar, newComposingKeys);
+      checkInput(composedChar, newComposingKeys);
     }
   }, [koreanKeyMap, lastKeyPressTime, currentChar, composingKeys]);
+
+  const composeCharacter = (keys) => {
+    for (let i = keys.length; i > 0; i--) {
+      const subComposed = composedVowels[keys.slice(-i).join('')];
+      if (subComposed) {
+        return subComposed;
+      }
+    }
+    return keys[keys.length - 1] || '';
+  };
 
   const checkInput = (input, keys) => {
     if (isCorrect) return;
   
-    let composed = input;
-    
-    if (keys.length > 1) {
-      for (let i = keys.length; i > 1; i--) {
-        const subComposed = composedVowels[keys.slice(-i).join('')];
-        if (subComposed) {
-          composed = subComposed;
-          break;
-        }
-      }
-    }
-    
-    if (composed === currentChar) {
+    if (input === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
         nextCharacter();
+        setCurrentInput('');
       }, 500);
       setComposingKeys([]);
     } else {
       setIsCorrect(false);
-      if (composed !== input && composedVowels[keys.join('')]) {
-        setComposingKeys([]);
-      }
     }
   };
 
