@@ -21,7 +21,7 @@ const OnekeySplitKr = () => {
   };
 
   const doubleTapMap = {
-    'ㅂ': 'ㅍ', 'ㅈ': 'ㅊ', 'ㄱ': 'ㅋ'
+    'ㅁ': ';', 'ㄹ': "'", 'ㅊ': '/'
   };
 
   const doubleConsonantMap = {
