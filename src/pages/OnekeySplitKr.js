@@ -11,7 +11,6 @@ const OnekeySplitKr = () => {
   const [isConsonant, setIsConsonant] = useState(true);
   const [keysToPress, setKeysToPress] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-  const [currentInput, setCurrentInput] = useState('');
 
   const koreanKeyMap = {
     'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
@@ -22,7 +21,7 @@ const OnekeySplitKr = () => {
   };
 
   const doubleTapMap = {
-    'ㅁ': ';', 'ㄹ': "'", 'ㅊ': '/', '-': '='
+    'ㅂ': 'ㅍ', 'ㅈ': 'ㅊ', 'ㄱ': 'ㅋ'
   };
 
   const doubleConsonantMap = {
@@ -80,19 +79,19 @@ const OnekeySplitKr = () => {
     setComposingKeys([]);
     setIsConsonant(!isConsonant);
 
-    if (vowelComponents[newChar]) {
-      setKeysToPress(vowelComponents[newChar]);
-    } else if (Object.values(doubleTapMap).includes(newChar)) {
-      const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
-      setKeysToPress([keyToPress, keyToPress]);
-    } else if (Object.values(doubleConsonantMap).includes(newChar)) {
-      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-      setKeysToPress(['Shift', keyToPress.toLowerCase()]);
-    } else {
-      const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
-      setKeysToPress(keyToPress ? [keyToPress] : []);
-    }
-  }, [isConsonant]);
+  if (vowelComponents[newChar]) {
+    setKeysToPress(vowelComponents[newChar]);
+  } else if (Object.values(doubleTapMap).includes(newChar)) {
+    const keyToPress = Object.keys(doubleTapMap).find(key => doubleTapMap[key] === newChar);
+    setKeysToPress([keyToPress, keyToPress]);
+  } else if (Object.values(doubleConsonantMap).includes(newChar)) {
+    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+    setKeysToPress(['Shift', keyToPress.toLowerCase()]);
+  } else {
+    const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
+    setKeysToPress(keyToPress ? [keyToPress] : []);
+  }
+}, [isConsonant]);
 
   const goBack = () => {
     window.history.back();
@@ -100,65 +99,61 @@ const OnekeySplitKr = () => {
 
   useEffect(() => {
     nextCharacter();
-  }, [nextCharacter]);
+  }, []);
 
   const handleKeyPress = useCallback((event) => {
     const key = event.key;
     const currentTime = new Date().getTime();
-    
-    let pressedChar = '';
 
     if (koreanKeyMap[key]) {
-      pressedChar = koreanKeyMap[key];
-      
+      let pressedChar = koreanKeyMap[key];
+
       if (!event.shiftKey && currentTime - lastKeyPressTime < 300 && doubleTapMap[pressedChar]) {
         pressedChar = doubleTapMap[pressedChar];
       }
-      
-      if (event.shiftKey && doubleConsonantMap[pressedChar]) {
-        pressedChar = doubleConsonantMap[pressedChar];
-      }
-    } else if (Object.values(cheonjinMap).some(item => item.key === key.toUpperCase())) {
-      pressedChar = Object.values(cheonjinMap).find(item => item.key === key.toUpperCase()).char;
-    }
 
-    if (pressedChar) {
       setPressedKey(pressedChar);
       setLastKeyPressTime(currentTime);
-      
+
       const newComposingKeys = [...composingKeys, pressedChar];
       setComposingKeys(newComposingKeys);
+      checkInput(pressedChar, newComposingKeys);
+    } else if (Object.values(cheonjinMap).some(item => item.key === key.toUpperCase())) {
+      const cheonjinChar = Object.values(cheonjinMap).find(item => item.key === key.toUpperCase()).char;
+      const newComposingKeys = [...composingKeys, cheonjinChar];
+      setComposingKeys(newComposingKeys);
 
-      let composedChar = composeCharacter(newComposingKeys);
-      setCurrentInput(prevInput => prevInput + composedChar);
-      
-      checkInput(composedChar, newComposingKeys);
+      checkInput(cheonjinChar, newComposingKeys);
     }
   }, [koreanKeyMap, lastKeyPressTime, currentChar, composingKeys]);
 
-  const composeCharacter = (keys) => {
-    for (let i = keys.length; i > 0; i--) {
-      const subComposed = composedVowels[keys.slice(-i).join('')];
-      if (subComposed) {
-        return subComposed;
-      }
-    }
-    return keys[keys.length - 1] || '';
-  };
-
   const checkInput = (input, keys) => {
     if (isCorrect) return;
-  
-    if (input === currentChar) {
+
+    let composed = input;
+
+    if (keys.length > 1) {
+      for (let i = keys.length; i > 1; i--) {
+        const subComposed = composedVowels[keys.slice(-i).join('')];
+        if (subComposed) {
+          composed = subComposed;
+          break;
+        }
+      }
+    }
+
+    if (composed === currentChar) {
       setIsCorrect(true);
       setScore(prevScore => prevScore + 1);
       setTimeout(() => {
         nextCharacter();
-        setCurrentInput('');
       }, 500);
       setComposingKeys([]);
     } else {
       setIsCorrect(false);
+      if (composed !== input && composedVowels[keys.join('')]) {
+        setComposingKeys([]);
+      }
     }
   };
 
@@ -176,7 +171,7 @@ const OnekeySplitKr = () => {
       highlightKeys.push(key);
     }
   });
-  
+
   Object.entries(doubleConsonantMap).forEach(([key, value]) => {
     if (value === currentChar) {
       highlightKeys.push(key);
@@ -190,11 +185,11 @@ const OnekeySplitKr = () => {
         return '탭1: .\n탭2: ,';
       }
       let content = `탭1: ${key.key}\n`;
-      if (key.doubleTap) {
-        content += `탭2: ${key.doubleTap}\n`;
+      if (doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]) {
+        content += `탭2: ${doubleTapMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
       }
-      if (key.doubleConsonant) {
-        content += `Shift: ${key.doubleConsonant}\n`;
+      if (doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]) {
+        content += `Shift: ${doubleConsonantMap[koreanKeyMap[key.key.toUpperCase()]]}\n`;
       }
       return content.trim();
     }
@@ -218,7 +213,7 @@ const OnekeySplitKr = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 자판 자리 연습</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">한글 키보드 자리 연습</h1>
       <div className={`text-9xl mb-2 ${isCorrect === false ? 'text-red-500' : isCorrect === true ? 'text-green-500' : ''}`}>
         {currentChar}
       </div>
@@ -283,5 +278,3 @@ const OnekeySplitKr = () => {
     </div>
   );
 };
-
-export default OnekeySplitKr;
