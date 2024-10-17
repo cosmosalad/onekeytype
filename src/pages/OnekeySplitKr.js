@@ -277,4 +277,8 @@ const OnekeySplitKr = () => {
       </button>
     </div>
   );
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> de7e28b6a6d48f4d909568b61557b2a6904915ef
