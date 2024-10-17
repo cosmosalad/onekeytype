@@ -278,3 +278,4 @@ const OnekeySplitKr = () => {
     </div>
   );
 };
+export default OnekeySplitKr;
