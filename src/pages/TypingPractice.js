@@ -233,7 +233,7 @@ const TypingPractice = () => {
               <button
                 key={option.value}
                 onClick={() => changeLayout(option.value)}
-                className={`flex flex-col items-center justify-start p-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
+                className={`flex flex-col items-center justify-start pt-2 pb-5 px-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
                   currentLayout === option.value
                     ? 'bg-blue-500 text-white'
                     : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
