@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import keyboardLayout from '../data/layout/Usage Guide split.json';
+import keyboardLayout_R from '../data/layout/Usage Guide split.json';
+import keyboardLayout_L from '../data/layout/Usage Guide split_L.json';
 
 const OnekeyHybridEn = () => {
-  const [showDetails, setShowDetails] = useState(false);
 
-  const keyboard = keyboardLayout;
+  const [keyboard, setKeyboard] = useState(() => {
+    const savedLayout = localStorage.getItem('selectedLayout');
+    return savedLayout === 'left' ? keyboardLayout_L : keyboardLayout_R;
+  });
+
+  const [showDetails, setShowDetails] = useState(false);
 
   const goBack = () => {
     window.history.back();
@@ -45,7 +50,7 @@ const OnekeyHybridEn = () => {
         <h1 className="text-3xl font-bold mb-6 text-gray-800">메인 레이아웃 사용 가이드</h1>
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="mb-20 px-4 py-2 bg-blue-500 text-white rounded"
+          className="mb-20 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600"
         >
           {showDetails ? '간단히 보기' : '자세히 보기'}
         </button>
@@ -111,7 +116,7 @@ const OnekeyHybridEn = () => {
           </ul>
         </div>
         <button onClick={goBack}
-          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600">
           뒤로 가기
         </button>
       </div>

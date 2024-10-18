@@ -1,23 +1,38 @@
-import React, { useState } from 'react';
-import HybridEnglishLayout from '../data/layout/Hybrid English.json';
-import HybridKoreanLayout from '../data/layout/Hybrid Korean.json';
-import SplitEnglishLayout from '../data/layout/Split English.json';
-import SplitKoreanLayout from '../data/layout/Split Korean.json';
+import React, { useState, useEffect } from 'react';
+import HybridEnglishLayout_R from '../data/layout/Hybrid English.json';
+import HybridKoreanLayout_R from '../data/layout/Hybrid Korean.json';
+import SplitEnglishLayout_R from '../data/layout/Split English.json';
+import SplitKoreanLayout_R from '../data/layout/Split Korean.json';
+import HybridEnglishLayout_L from '../data/layout/Hybrid English_L.json';
+import HybridKoreanLayout_L from '../data/layout/Hybrid Korean_L.json';
+import SplitEnglishLayout_L from '../data/layout/Split English_L.json';
+import SplitKoreanLayout_L from '../data/layout/Split Korean_L.json';
 
 const KeyboardLayout = ({ layout }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [currentLayout, setCurrentLayout] = useState(null);
 
-  const getLayout = () => {
-    switch(layout) {
-      case 'Hybrid English': return HybridEnglishLayout;
-      case 'Hybrid Korean': return HybridKoreanLayout;
-      case 'Split English': return SplitEnglishLayout;
-      case 'Split Korean': return SplitKoreanLayout;
-      default: return HybridEnglishLayout;
+  useEffect(() => {
+    const savedLayout = localStorage.getItem('selectedLayout');
+    const isLeftHanded = savedLayout === 'left';
+
+    const getLayout = () => {
+      switch(layout) {
+        case 'Hybrid English': return isLeftHanded ? HybridEnglishLayout_L : HybridEnglishLayout_R;
+        case 'Hybrid Korean': return isLeftHanded ? HybridKoreanLayout_L : HybridKoreanLayout_R;
+        case 'Split English': return isLeftHanded ? SplitEnglishLayout_L : SplitEnglishLayout_R;
+        case 'Split Korean': return isLeftHanded ? SplitKoreanLayout_L : SplitKoreanLayout_R;
+        default: return null;
+      }
+    };
+
+    const selectedLayout = getLayout();
+    if (selectedLayout) {
+      setCurrentLayout(selectedLayout);
+    } else {
+      console.error(`레이아웃을 찾을 수 없습니다: ${layout}`);
     }
-  };
-
-  const currentLayout = getLayout();
+  }, [layout]);
 
   const getKeyContent = (key) => {
     if (showDetails) {
@@ -43,11 +58,15 @@ const KeyboardLayout = ({ layout }) => {
     return key.key;
   };
 
+  if (!currentLayout) {
+    return <div>레이아웃을 불러오는 중...</div>;
+  }
+
   return (
     <div className="flex flex-col items-center">
       <button 
          onClick={() => setShowDetails(!showDetails)}
-         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+         className="mb-4 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600"
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>

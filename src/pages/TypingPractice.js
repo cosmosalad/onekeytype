@@ -15,6 +15,7 @@ const TypingPractice = () => {
   const [showKeyboardOptions, setShowKeyboardOptions] = useState(false);
   const [currentLayout, setCurrentLayout] = useState('');
   const [showKeyboard, setShowKeyboard] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (language) {
@@ -187,7 +188,6 @@ const TypingPractice = () => {
   const toggleKeyboardOptions = () => {
     setShowKeyboardOptions(!showKeyboardOptions);
     if (showKeyboardOptions) {
-
       setShowKeyboard(false);
       setCurrentLayout('');
     }
@@ -198,29 +198,61 @@ const TypingPractice = () => {
     setShowKeyboard(layout !== '');
   };
 
+  const layoutOptions = [
+    { value: "Split Korean", label: "메인 키보드\n한글 레이아웃", icon: "🇰🇷", emphasized: true },
+    { value: "Split English", label: "메인 키보드\n영어 레이아웃", icon: "🇺🇸", emphasized: true },
+    { value: "Hybrid Korean", label: "서브 키보드\n한글 레이아웃", icon: "🇰🇷" },
+    { value: "Hybrid English", label: "서브 키보드\n영어 레이아웃", icon: "🇺🇸" },
+  ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
-      <div className="absolute top-4 left-4 flex items-center">
+      <div className={`fixed ${isMobile ? 'bottom-4 left-4 right-4' : 'top-4 left-4'} flex flex-col items-start z-10`}>
         <button
           onClick={toggleKeyboardOptions}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors mr-4"
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 mb-4"
         >
           {showKeyboardOptions ? '레이아웃 숨기기' : '레이아웃 보이기'}
         </button>
         {showKeyboardOptions && (
-          <select
-            value={currentLayout}
-            onChange={(e) => changeLayout(e.target.value)}
-            className="px-2 py-1 border border-gray-300 rounded"
-          >
-            <option value="">레이아웃 선택</option>
-            <option value="Split Korean">메인 키보드 한글 레이아웃</option>
-            <option value="Split English">메인 키보드 영어 레이아웃</option>
-            <option value="Hybrid Korean">서브 키보드 한글 레이아웃</option>
-            <option value="Hybrid English">서브 키보드 영어 레이아웃</option>
-          </select>
+          <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-2 bg-white p-3 rounded-lg shadow-md`}>
+            {layoutOptions.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => changeLayout(option.value)}
+                className={`flex flex-col items-center justify-start p-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
+                  currentLayout === option.value
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                } ${option.emphasized && !isMobile ? 'col-span-2 h-24' : 'h-20'}`}
+              >
+                <div className="flex flex-col items-center justify-center h-full space-y-1">
+                  <span className={`${option.emphasized && !isMobile ? 'text-5xl' : 'text-2xl'}`}>{option.icon}</span>
+                  <span className={`text-center whitespace-pre-line leading-tight ${
+                    option.emphasized && !isMobile ? 'text-base font-bold' : 'text-xs font-semibold'
+                  }`}>
+                    {option.label}
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
         )}
       </div>
+
       
       {showKeyboard && currentLayout && <KeyboardLayout layout={currentLayout} />}
       <div className="h-20"></div>
@@ -239,7 +271,7 @@ const TypingPractice = () => {
           </div>
           <button
             onClick={handleGoBack}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
             홈으로 돌아가기
           </button>
         </>
@@ -282,25 +314,37 @@ const TypingPractice = () => {
             Line: {currentLineIndex + 1} / {selectedText.text.length}
           </div>
         </div>
-      )}
+      )} 
 
       {isCompleted && (
-        <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-3xl font-bold mb-4 text-gray-800">수고하셨습니다!</h2>
-          <p className="text-2xl mb-6">최종 타이핑 속도: {cpm} CPM</p>
-          <button
-            onClick={handleGoBack}
-            className="px-6 py-2 bg-blue-500 text-white rounded shadow text-lg transition duration-300 ease-in-out hover:scale-105 active:scale-95"
-          >
-            새로 연습하기
-          </button>
+        <div className="w-full max-w-3xl bg-white p-8 rounded-lg shadow-lg text-center animate-fade-in">
+          <h2 className="text-4xl font-bold mb-6 text-blue-600">
+            수고하셨습니다!
+          </h2>
+          <p className="text-3xl mb-8 text-gray-700">
+            최종 타이핑 속도: <span className="font-bold text-blue-500">{cpm} CPM</span>
+          </p>
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={handleGoBack}
+              className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow text-lg font-semibold transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105 active:scale-95"
+            >
+              새로 연습하기
+            </button>
+            <button
+              onClick={() => navigate('/onekeytype')}
+              className="px-6 py-3 bg-gray-100 text-blue-500 rounded-lg shadow text-lg font-semibold transition duration-300 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95"
+            >
+              홈으로 돌아가기
+            </button>
+          </div>
         </div>
       )}
 
       {(language || selectedText) && !isCompleted && (
         <button
           onClick={handleGoBack}
-          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 active:scale-95">
           뒤로 가기
         </button>
       )}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import keyboardLayout from '../data/layout/Hybrid English.json';
+import keyboardLayout_R from '../data/layout/Hybrid English.json';
+import keyboardLayout_L from '../data/layout/Hybrid English_L.json';
 
 const OnekeyHybridEn = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -11,10 +12,22 @@ const OnekeyHybridEn = () => {
   const [doubleTapKey, setDoubleTapKey] = useState('');
   const [keysToPress, setKeysToPress] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-
+  
+  const [keyboard, setKeyboard] = useState(() => {
+    const savedLayout = localStorage.getItem('selectedLayout');
+    return savedLayout === 'left' ? keyboardLayout_L : keyboardLayout_R;
+  });
+  
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-  const keyboard = keyboardLayout;
+  useEffect(() => {
+    const savedLayout = localStorage.getItem('selectedLayout');
+    if (savedLayout === 'left') {
+      setKeyboard(keyboardLayout_L);
+    } else {
+      setKeyboard(keyboardLayout_R);
+    }
+  }, []);
 
   const nextCharacter = useCallback(() => {
     const randomIndex = Math.floor(Math.random() * alphabet.length);
@@ -164,7 +177,7 @@ const OnekeyHybridEn = () => {
       <div className="text-2xl mb-4 text-gray-700">점수: {score}</div>
       <button 
         onClick={() => setShowDetails(!showDetails)} 
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600"
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>
@@ -217,7 +230,7 @@ const OnekeyHybridEn = () => {
         </p>
       </div>
       <button onClick={goBack}
-        className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+        className="mt-8 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600">
         뒤로 가기
       </button>
     </div>

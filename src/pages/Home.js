@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReactTyped } from "react-typed";
 
 const Home = () => {
+  const [selectedLayout, setSelectedLayout] = useState(() => {
+    return localStorage.getItem('selectedLayout') || 'right';
+  });
+
   const practiceTypes = [
     { name: '한글 서브 레이아웃', path: '/onekey_hybrid_kr', description: '한손키보드 한글 레이아웃 자판 연습' },
     { name: '한글 메인 레이아웃', path: '/onekey_split_kr', description: '한손키보드 한글 레이아웃 자판 연습' },
@@ -16,6 +20,11 @@ const Home = () => {
     description: '다양한 텍스트로 영어 또는 한국어 장문 타이핑 연습'
   };
 
+  const handleLayoutChange = (layout) => {
+    setSelectedLayout(layout);
+    localStorage.setItem('selectedLayout', layout);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
       <h1 className="text-4xl font-bold mb-8 h-16">
@@ -27,6 +36,30 @@ const Home = () => {
           loop
         />
       </h1>
+
+      <div className="mb-8 flex justify-center space-x-4">
+        <button
+          onClick={() => handleLayoutChange('left')}
+          className={`px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
+            selectedLayout === 'left' 
+              ? 'bg-blue-500 text-white hover:bg-blue-600' 
+              : 'bg-gray-200 hover:bg-gray-300'
+          }`}
+        >
+          왼손용 키보드
+        </button>
+        <button
+          onClick={() => handleLayoutChange('right')}
+          className={`px-4 py-2 rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
+            selectedLayout === 'right' 
+              ? 'bg-blue-500 text-white hover:bg-blue-600' 
+              : 'bg-gray-200 hover:bg-gray-300'
+          }`}
+        >
+          오른손용 키보드
+        </button>
+      </div>
+
       <div className="grid grid-cols-3 gap-4 mb-8 w-full max-w-6xl">
         {practiceTypes.slice(0, 2).map((type, index) => (
           <Link
@@ -66,15 +99,13 @@ const Home = () => {
           <li><a href="https://vial.rocks/" className="text-blue-600 hover:underline">Vial Web</a></li>
         </ul>
       <div className="flex space-x-4">
-        <Link
-          to="/usage_guide_hybrid"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+        <Link to="/usage_guide_hybrid"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
         >
           서브 레이아웃 사용 가이드
         </Link>
-        <Link
-          to="/usage_guide_split"
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+        <Link to="/usage_guide_split"
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95"
         >
           메인 레이아웃 사용 가이드
         </Link>

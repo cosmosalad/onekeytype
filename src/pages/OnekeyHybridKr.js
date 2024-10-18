@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import keyboardLayout from '../data/layout/Hybrid Korean.json';
+import keyboardLayout_R from '../data/layout/Hybrid Korean.json';
+import keyboardLayout_L from '../data/layout/Hybrid Korean_L.json';
 
 const OnekeyHybridKr = () => {
   const [currentChar, setCurrentChar] = useState('');
@@ -11,6 +12,11 @@ const OnekeyHybridKr = () => {
   const [isConsonant, setIsConsonant] = useState(true);
   const [keysToPress, setKeysToPress] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
+
+  const [keyboard, setKeyboard] = useState(() => {
+    const savedLayout = localStorage.getItem('selectedLayout');
+    return savedLayout === 'left' ? keyboardLayout_L : keyboardLayout_R;
+  });
   
   const koreanKeyMap = {
     'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
@@ -67,8 +73,6 @@ const OnekeyHybridKr = () => {
   const consonants = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
   const vowels = 'ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣㅐㅒㅔㅖ';
 
-  const keyboard = keyboardLayout;
-
   const nextCharacter = useCallback(() => {
     const characters = isConsonant ? consonants : vowels;
     const randomIndex = Math.floor(Math.random() * characters.length);
@@ -91,7 +95,7 @@ const OnekeyHybridKr = () => {
       const keyToPress = Object.keys(koreanKeyMap).find(key => koreanKeyMap[key] === newChar);
       setKeysToPress(keyToPress ? [keyToPress] : []);
     }
-  }, [isConsonant]);
+  }, [isConsonant, keyboard]);
 
   const goBack = () => {
     window.history.back();
@@ -232,7 +236,7 @@ const OnekeyHybridKr = () => {
       <div className="text-2xl mb-4 text-gray-700">점수: {score}</div>
       <button 
         onClick={() => setShowDetails(!showDetails)} 
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600"
       >
         {showDetails ? '간단히 보기' : '자세히 보기'}
       </button>
@@ -286,7 +290,7 @@ const OnekeyHybridKr = () => {
         타이핑: {composedVowels[composingKeys.join('')] || composingKeys[composingKeys.length - 1] || ''}
       </div>
       <button onClick={goBack}
-          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          className="mt-8 px-4 py-2 bg-blue-500 text-white rounded transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 hover:bg-blue-600">
           뒤로 가기
       </button>
     </div>

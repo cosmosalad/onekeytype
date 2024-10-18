@@ -1,0 +1,51 @@
+[
+  {
+    "row": [
+      { "key": "ESC", "x": 5, "y": 0.5, "fontSize": "25px" },
+      { "key": "Alt", "x": 4, "y": 0.25, "fontSize": "25px" },
+      { "key": "ㅍ", "x": 3, "y": 0 },
+      { "key": "ㅋ", "x": 2, "y": 0.25 },
+      { "key": "-", "x": 1, "y": 0.5, "topRight": "=", "doubleTap": "=" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "기타", "x": 6, "y": -0.5 },
+      { "key": "ㅂ", "x": 5, "y": 1, "doubleConsonant": "ㅃ" },
+      { "key": "ㅈ", "x": 4, "y": 0.75, "doubleConsonant": "ㅉ" },
+      { "key": "ㅇ", "x": 3, "y": 0.5 },
+      { "key": "ㄱ", "x": 2, "y": 0.75, "doubleConsonant": "ㄲ" },
+      { "key": "ㅎ", "x": 1, "y": 1 },
+      { "key": "Back Space", "x": 0, "y": 0, "fontSize": "18px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "영문", "x": 6, "y": 0 },
+      { "key": "ㄴ", "x": 5, "y": 1.5 },
+      { "key": "ㅣ", "x": 4, "y": 1.25, "cheonjin": true },
+      { "key": "ㆍ", "x": 3, "y": 1, "cheonjin": true },
+      { "key": "ㅡ", "x": 2, "y": 1.25, "cheonjin": true },
+      { "key": "ㅅ", "x": 1, "y": 1.5, "doubleConsonant": "ㅆ" },
+      { "key": ". ,", "x": 0, "y": 0.5 }
+    ]
+  },
+  {
+    "row": [
+      { "key": "한글", "x": 6, "y": 0.5 },
+      { "key": "ㅌ", "x": 5, "y": 2 },
+      { "key": "ㄷ", "x": 4, "y": 1.75, "doubleConsonant": "ㄸ" },
+      { "key": "ㅁ", "x": 3, "y": 1.5, "topRight": ";", "doubleTap": ";" },
+      { "key": "ㄹ", "x": 2, "y": 1.75, "topRight": "'", "doubleTap": "'" },
+      { "key": "ㅊ", "x": 1, "y": 2, "topRight": "/", "doubleTap": "/" },
+      { "key": "Enter", "x": 0, "y": 1, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Space", "x": 5.65, "y": 2.8, "rotate": 30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 4.55, "y": 2.9, "rotate": 15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 3.5, "y": 2.5, "fontSize": "25px" }
+    ]
+  }
+]
