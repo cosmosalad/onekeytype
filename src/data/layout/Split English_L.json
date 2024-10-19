@@ -1,8 +1,8 @@
 [
   {
     "row": [
-      { "key": "ESC", "x": 5, "y": 0.5, "fontSize": "20px" },
-      { "key": "Alt", "x": 4, "y": 0.25, "fontSize": "20px" },
+      { "key": "ESC", "x": 5, "y": 0.5, "fontSize": "25px" },
+      { "key": "Alt", "x": 4, "y": 0.25, "fontSize": "25px" },
       { "key": "G", "x": 3, "y": 0, "topRight": "Q", "doubleTap": "Q" },
       { "key": "V", "x": 2, "y": 0.25, "topRight": "Z", "doubleTap": "Z" },
       { "key": "-", "x": 1, "y": 0.5, "topRight": "=", "doubleTap": "=" }
@@ -16,7 +16,7 @@
       { "key": "N", "x": 3, "y": 0.5, "topRight": "F", "doubleTap": "F" },
       { "key": "T", "x": 2, "y": 0.75 },
       { "key": "S", "x": 1, "y": 1 },
-      { "key": "Back\nSpace", "x": 0, "y": 0, "fontSize": "18px" }
+      { "key": "Back\nSpace", "x": 0, "y": 0, "fontSize": "25px" }
     ]
   },
   {
@@ -38,14 +38,14 @@
       { "key": "Y", "x": 3, "y": 1.5, "topRight": ";", "doubleTap": ";" },
       { "key": "L", "x": 2, "y": 1.75, "topRight": "'", "doubleTap": "'" },
       { "key": "M", "x": 1, "y": 2, "topRight": "/", "doubleTap": "/" },
-      { "key": "Enter", "x": 0, "y": 1, "fontSize": "20px" }
+      { "key": "Enter", "x": 0, "y": 1, "fontSize": "25px" }
     ]
   },
   {
     "row": [
-      { "key": "Space", "x": 5.65, "y": 2.8, "rotate": 30, "height": 1.5, "fontSize": "20px" },
-      { "key": "Shift", "x": 4.55, "y": 2.9, "rotate": 15, "fontSize": "20px" },
-      { "key": "Ctrl", "x": 3.5, "y": 2.5, "fontSize": "20px" }
+      { "key": "Space", "x": 5.65, "y": 2.8, "rotate": 30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 4.55, "y": 2.9, "rotate": 15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 3.5, "y": 2.5, "fontSize": "25px" }
     ]
   }
 ]

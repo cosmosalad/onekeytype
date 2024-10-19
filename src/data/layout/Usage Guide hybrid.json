@@ -55,7 +55,7 @@
       { "key": "8", "x": 19, "y": 0.5, "NumLock": "↑" },
       { "key": "9", "x": 20, "y": 0.75, "NumLock": "PgUp" },
       { "key": "", "x": 21, "y": 1 },
-      { "key": "Back\nSpace", "x": 22, "y": 0, "fontSize": "18px" },
+      { "key": "Back\nSpace", "x": 22, "y": 0, "fontSize": "25px" },
 
 
       { "key": "", "x": 24, "y": -0.5 },
@@ -69,7 +69,7 @@
   },
   {
     "row": [
-      { "key": "Alt", "x": 0, "y": 0, "fontSize": "20px" },
+      { "key": "Alt", "x": 0, "y": 0 },
       { "key": "ㄴ", "x": 1, "y": 1.5 },
       { "key": "ㅣ", "x": 2, "y": 1.25, "cheonjin": true },
       { "key": "ㆍ", "x": 3, "y": 1, "cheonjin": true },
@@ -87,7 +87,7 @@
       { "key": "기타", "x": 14, "y": 0.5, "bottomRight": "[", "FnTap": "[", "fndoubleTap": "]" },
 
 
-      { "key": "Tab", "x": 16, "y": 0 },
+      { "key": "Alt", "x": 16, "y": 0 },
       { "key": "", "x": 17, "y": 1.5 },
       { "key": "4", "x": 18, "y": 1.25, "NumLock": "←" },
       { "key": "5", "x": 19, "y": 1 },
@@ -125,7 +125,7 @@
       { "key": "Enter", "x": 14, "y": 1, "bottomRight": "₩", "FnTap": "₩", "fontSize": "30px" },
 
 
-      { "key": "Alt", "x": 16, "y": 0.5 },
+      { "key": "Tab", "x": 16, "y": 0.5 },
       { "key": "0", "x": 17, "y": 2, "NumLock": "Ins" },
       { "key": "1", "x": 18, "y": 1.75, "NumLock": "End" },
       { "key": "2", "x": 19, "y": 1.5, "NumLock": "↓" },
@@ -145,19 +145,19 @@
   },
   {
     "row": [
-      { "key": "Space\n\nFn", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
-      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
-      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "20px" },
+      { "key": "Space\n\nFn", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "25px" },
 
 
-      { "key": "Space\n\nFn", "x": 8.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
-      { "key": "Shift", "x": 9.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
-      { "key": "Ctrl", "x": 10.5, "y": 2.5, "fontSize": "20px" },
+      { "key": "Space\n\nFn", "x": 8.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 9.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 10.5, "y": 2.5, "fontSize": "25px" },
 
 
-      { "key": "Space", "x": 16.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "20px" },
-      { "key": "Shift", "x": 17.45, "y": 2.9, "rotate": -15, "fontSize": "20px" },
-      { "key": "Ctrl", "x": 18.5, "y": 2.5, "fontSize": "20px" },
+      { "key": "Space", "x": 16.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
+      { "key": "Shift", "x": 17.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 18.5, "y": 2.5, "fontSize": "25px" },
 
 
       { "key": "", "x": 24.35, "y": 2.8, "rotate": -30, "height": 1.5 },
