@@ -15,8 +15,8 @@
       { "key": "ㅈ", "x": 2, "y": 0.75, "doubleConsonant": "ㅉ" },
       { "key": "ㅇ", "x": 3, "y": 0.5 },
       { "key": "ㄱ", "x": 4, "y": 0.75, "doubleConsonant": "ㄲ" },
-      { "key": "ㅎ", "x": 5, "y": 1 },
-      { "key": "Back Space", "x": 6, "y": 0, "fontSize": "18px" }
+      { "key": "ㅎ", "x": 5, "y": 1, "topRight": "!", "doubleTap": "!" },
+      { "key": "Back Space", "x": 6, "y": 0, "fontSize": "25px" }
     ]
   },
   {
@@ -37,7 +37,7 @@
       { "key": "ㄷ", "x": 2, "y": 1.75, "doubleConsonant": "ㄸ" },
       { "key": "ㅁ", "x": 3, "y": 1.5, "topRight": ";", "doubleTap": ";" },
       { "key": "ㄹ", "x": 4, "y": 1.75, "topRight": "'", "doubleTap": "'" },
-      { "key": "ㅊ", "x": 5, "y": 2, "topRight": "/", "doubleTap": "/" },
+      { "key": "ㅊ", "x": 5, "y": 2, "topRight": "/", "doubleTap": "/", "shiftdoubleTap": "?" },
       { "key": "Enter", "x": 6, "y": 1, "fontSize": "25px" }
     ]
   },

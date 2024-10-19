@@ -19,7 +19,7 @@ const OnekeySplitEn = () => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   const doubleTapMap = {
-    'G': 'Q', 'V': 'Z', 'R': 'P', 'H': 'B', 'U': 'C', 'I': 'J', 'D': 'K', 'W': 'X', 'N': 'F', 'M': '/', 'Y': ';', 'L': '"', '-': '='
+    'G': 'Q', 'V': 'Z', 'R': 'P', 'H': 'B', 'U': 'C', 'I': 'J', 'D': 'K', 'W': 'X', 'N': 'F', 'M': '/', 'Y': ';', 'L': '"', '-': '=', 'S': '!'
   };
 
   const nextCharacter = useCallback(() => {
@@ -101,6 +101,9 @@ const OnekeySplitEn = () => {
       let content = `탭1: ${key.key}\n`;
       if (doubleTapMap[key.key]) {
         content += `탭2: ${doubleTapMap[key.key]}\n`;
+      }
+      if (key.shiftdoubleTap) {
+        content += `Sft탭2: ${key.shiftdoubleTap}`;
       }
       return content.trim();
     }

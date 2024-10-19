@@ -33,6 +33,7 @@ const OnekeyHybridEn = () => {
       if (key.FnTap) content += `Fn: ${key.FnTap}\n`;
       if (key.fnsft) content += `FnSft: ${key.fnsft}\n`;
       if (key.fndoubleTap) content += `Fn탭2: ${key.fndoubleTap}`;
+      if (key.shiftdoubleTap) {content += `Sft탭2: ${key.shiftdoubleTap}`;}
       return content.trim();
     }
     return key.key;

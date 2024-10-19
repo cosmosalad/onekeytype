@@ -53,6 +53,9 @@ const KeyboardLayout = ({ layout }) => {
       if (key.doubleConsonant) {
         content += `Shift: ${key.doubleConsonant}`;
       }
+      if (key.shiftdoubleTap) {
+        content += `Sft탭2: ${key.shiftdoubleTap}`;
+      }
       return content.trim();
     }
     return key.key;

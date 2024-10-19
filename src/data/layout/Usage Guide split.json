@@ -29,7 +29,7 @@
       { "key": "ㅈ", "x": 2, "y": 0.75, "topRight": "ㅊ", "doubleTap": "ㅊ", "doubleConsonant": "ㅉ" },
       { "key": "ㅇ", "x": 3, "y": 0.5 },
       { "key": "ㄱ", "x": 4, "y": 0.75, "topRight": "ㅋ", "doubleTap": "ㅋ", "doubleConsonant": "ㄲ" },
-      { "key": "ㅎ", "x": 5, "y": 1 },
+      { "key": "ㅎ", "x": 5, "y": 1, "topRight": "!", "doubleTap": "!" },
       { "key": "Back Space", "x": 6, "y": 0, "fontSize": "25px" },
 
 
@@ -38,7 +38,7 @@
       { "key": "H", "x": 10, "y": 0.75, "topRight": "B", "doubleTap": "B" },
       { "key": "N", "x": 11, "y": 0.5 },
       { "key": "T", "x": 12, "y": 0.75 },
-      { "key": "S", "x": 13, "y": 1 },
+      { "key": "S", "x": 13, "y": 1, "topRight": "!", "doubleTap": "!" },
       { "key": "Back Space", "x": 14, "y": 0, "fontSize": "25px" },
 
 
@@ -48,7 +48,7 @@
       { "key": "8", "shift": "*", "x": 19, "y": 0.5, "topRight": "F8", "doubleTap": "F8" },
       { "key": "9", "shift": "(", "x": 20, "y": 0.75, "topRight": "F9", "doubleTap": "F9" },
       { "key": "0", "shift": ")", "x": 21, "y": 1, "topRight": "F10", "doubleTap": "F10" },
-      { "key": "Del", "x": 22, "y": 0, "fontSize": "25px" }
+      { "key": "Back Space", "x": 22, "y": 0, "fontSize": "25px" }
     ]
   },
   {
@@ -77,7 +77,7 @@
       { "key": "↑", "x": 19, "y": 1 },
       { "key": "`", "x": 20, "y": 1.25, "topRight": "₩", "doubleTap": "₩" },
       { "key": "PgUp", "x": 21, "y": 1.5, "fontSize": "25px" },
-      { "key": "Ins", "x": 22, "y": 0.5, "fontSize": "25px" }
+      { "key": "Del", "x": 22, "y": 0.5, "topRight": "Ins", "doubleTap": "Ins", "fontSize": "25px" }
     ]
   },
   {
@@ -96,7 +96,7 @@
       { "key": "W", "x": 10, "y": 1.75, "topRight": "X", "doubleTap": "X" },
       { "key": "Y", "x": 11, "y": 1.5, "topRight": ";", "doubleTap": ";" },
       { "key": "L", "x": 12, "y": 1.75, "topRight": "'", "doubleTap": "'" },
-      { "key": "M", "x": 13, "y": 2, "topRight": "/", "doubleTap": "/" },
+      { "key": "M", "x": 13, "y": 2, "topRight": "/", "doubleTap": "/", "shiftdoubleTap": "?" },
       { "key": "Enter", "x": 14, "y": 1, "fontSize": "25px" },
 
 
