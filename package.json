@@ -24,7 +24,7 @@
   "eject": "react-scripts eject",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build",
-  "copy-fonts": "mkdir -p build/assets/font && cp src/assets/font/PretendardVariable.ttf build/assets/font/"
+  "copy-fonts": "if not exist build\\assets\\font mkdir build\\assets\\font && copy src\\assets\\font\\PretendardVariable.ttf build\\assets\\font\\"
 },
   "eslintConfig": {
     "extends": [
