@@ -36,7 +36,7 @@
       { "key": "기타", "x": 8, "y": -0.5 },
       { "key": "R", "x": 9, "y": 1, "topRight": "P", "doubleTap": "P" },
       { "key": "H", "x": 10, "y": 0.75, "topRight": "B", "doubleTap": "B" },
-      { "key": "N", "x": 11, "y": 0.5 },
+      { "key": "N", "x": 11, "y": 0.5, "topRight": "F", "doubleTap": "F" },
       { "key": "T", "x": 12, "y": 0.75 },
       { "key": "S", "x": 13, "y": 1, "topRight": "!", "doubleTap": "!" },
       { "key": "Back Space", "x": 14, "y": 0, "fontSize": "25px" },
