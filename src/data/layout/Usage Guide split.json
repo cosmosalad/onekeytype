@@ -12,7 +12,7 @@
       { "key": "Alt", "x": 10, "y": 0.25, "fontSize": "25px" },
       { "key": "G", "x": 11, "y": 0, "topRight": "Q", "doubleTap": "Q" },
       { "key": "V", "x": 12, "y": 0.25, "topRight": "Z", "doubleTap": "Z" },
-      { "key": "F", "x": 13, "y": 0.5 },
+      { "key": "-", "x": 13, "y": 0.5, "topRight": "=", "doubleTap": "=" },
 
 
       { "key": "1", "shift": "!", "x": 17, "y": 0.5, "topRight": "F1", "doubleTap": "F1" },
