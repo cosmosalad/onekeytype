@@ -11,9 +11,9 @@ import UsageGuideSplit from './pages/UsageGuideSplit';
 
 function App() {
   return (
-    <BrowserRouter basename="/onekeytype">
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/onekeytype" element={<Home />} />
         <Route path="/onekey_hybrid_en" element={<OnekeyHybridEn />} />
         <Route path="/onekey_hybrid_kr" element={<OnekeyHybridKr />} />
         <Route path="/onekey_split_en" element={<OnekeySplitEn />} />

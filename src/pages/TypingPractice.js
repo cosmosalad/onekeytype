@@ -181,7 +181,7 @@ const TypingPractice = () => {
       setLanguage('');
       setTexts([]);
     } else {
-      navigate('/');
+      navigate('/onekeytype');
     }
   }, [selectedText, language, resetPractice, navigate]);
 
