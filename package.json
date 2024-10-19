@@ -19,11 +19,12 @@
   },
   "scripts": {
   "start": "react-scripts start",
-  "build": "react-scripts build",
+  "build": "react-scripts build && npm run copy-fonts",
   "test": "react-scripts test",
   "eject": "react-scripts eject",
   "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+  "deploy": "gh-pages -d build",
+  "copy-fonts": "mkdir -p build/assets/font && cp src/assets/font/PretendardVariable.ttf build/assets/font/"
 },
   "eslintConfig": {
     "extends": [
