@@ -25,10 +25,10 @@
   {
     "row": [
       { "key": "기타", "x": 0, "y": -0.5 },
-      { "key": "ㅂ", "x": 1, "y": 1, "topRight": "ㅍ", "doubleTap": "ㅍ", "doubleConsonant": "ㅃ" },
-      { "key": "ㅈ", "x": 2, "y": 0.75, "topRight": "ㅊ", "doubleTap": "ㅊ", "doubleConsonant": "ㅉ" },
+      { "key": "ㅂ", "x": 1, "y": 1, "doubleConsonant": "ㅃ" },
+      { "key": "ㅈ", "x": 2, "y": 0.75, "doubleConsonant": "ㅉ" },
       { "key": "ㅇ", "x": 3, "y": 0.5 },
-      { "key": "ㄱ", "x": 4, "y": 0.75, "topRight": "ㅋ", "doubleTap": "ㅋ", "doubleConsonant": "ㄲ" },
+      { "key": "ㄱ", "x": 4, "y": 0.75, "doubleConsonant": "ㄲ" },
       { "key": "ㅎ", "x": 5, "y": 1, "topRight": "!", "doubleTap": "!" },
       { "key": "Back Space", "x": 6, "y": 0, "fontSize": "25px" },
 
