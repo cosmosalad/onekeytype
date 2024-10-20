@@ -332,7 +332,7 @@ const TypingPractice = () => {
               새로 연습하기
             </button>
             <button
-              onClick={() => navigate('/onekeytype')}
+              onClick={() => navigate('/')}
               className="px-6 py-3 bg-gray-100 text-blue-500 rounded-lg shadow text-lg font-semibold transition duration-300 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95"
             >
               홈으로 돌아가기
