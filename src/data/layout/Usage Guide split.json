@@ -2,14 +2,14 @@
   {
     "row": [
       { "key": "ESC", "x": 1, "y": 0.5, "fontSize": "25px" },
-      { "key": "Alt", "x": 2, "y": 0.25, "fontSize": "25px" },
+      { "key": "RAlt", "x": 2, "y": 0.25, "topRight": "LAlt", "doubleTap": "LAlt", "fontSize": "25px" },
       { "key": "ㅍ", "x": 3, "y": 0 },
       { "key": "ㅋ", "x": 4, "y": 0.25 },
       { "key": "-", "x": 5, "y": 0.5, "topRight": "=", "doubleTap": "=" },
 
 
       { "key": "ESC", "x": 9, "y": 0.5, "fontSize": "25px" },
-      { "key": "Alt", "x": 10, "y": 0.25, "fontSize": "25px" },
+      { "key": "RAlt", "x": 10, "y": 0.25, "topRight": "LAlt", "doubleTap": "LAlt", "fontSize": "25px" },
       { "key": "G", "x": 11, "y": 0, "topRight": "Q", "doubleTap": "Q" },
       { "key": "V", "x": 12, "y": 0.25, "topRight": "Z", "doubleTap": "Z" },
       { "key": "-", "x": 13, "y": 0.5, "topRight": "=", "doubleTap": "=" },
@@ -113,17 +113,17 @@
     "row": [
       { "key": "Space", "x": 0.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
       { "key": "Shift", "x": 1.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
-      { "key": "Ctrl", "x": 2.5, "y": 2.5, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 2.5, "y": 2.5, "topRight": "Win", "doubleTap": "Win", "fontSize": "25px" },
 
 
       { "key": "Space", "x": 8.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
       { "key": "Shift", "x": 9.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
-      { "key": "Ctrl", "x": 10.5, "y": 2.5, "fontSize": "25px" },
+      { "key": "Ctrl", "x": 10.5, "y": 2.5, "topRight": "Win", "doubleTap": "Win", "fontSize": "25px" },
 
 
       { "key": "Space", "x": 16.35, "y": 2.8, "rotate": -30, "height": 1.5, "fontSize": "25px" },
       { "key": "Shift", "x": 17.45, "y": 2.9, "rotate": -15, "fontSize": "25px" },
-      { "key": "Ctrl", "x": 18.5, "y": 2.5, "fontSize": "25px" }
+      { "key": "Ctrl", "x": 18.5, "y": 2.5, "topRight": "Win", "doubleTap": "Win", "fontSize": "25px" }
     ]
   }
 ]
