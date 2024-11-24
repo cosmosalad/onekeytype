@@ -96,7 +96,7 @@ const Home = () => {
           <li>화면에 표시된 문자나 텍스트를 입력하세요</li>
           <li>점수와 타이핑 속도를 높이도록 노력하세요</li>
           <li>필요한 경우 더블 탭, Fn키, 홀드를 사용하세요</li>
-          <li><a href="https://vial.rocks/" className="text-blue-600 hover:underline">Vial Web</a></li>
+          <li><a href="https://vial.rocks/" className="text-blue-600 hover:underline">키 변경 사이트</a></li>
         </ul>
       <div className="flex space-x-4">
         <Link to="/usage_guide_hybrid"

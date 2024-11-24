@@ -2,7 +2,7 @@
   {
     "row": [
       { "key": "ESC", "x": 5, "y": 0.5, "fontSize": "25px" },
-      { "key": "RAlt", "x": 4, "y": 0.25, "fontSize": "25px", "topRight": "LAlt", "doubleTap": "LAlt" },
+      { "key": "RAlt", "x": 4, "y": 0.25, "topRight": "LAlt", "doubleTap": "LAlt", "fontSize": "25px" },
       { "key": "ㅍ", "x": 3, "y": 0 },
       { "key": "ㅋ", "x": 2, "y": 0.25 },
       { "key": "-", "x": 1, "y": 0.5, "topRight": "=", "doubleTap": "=" }
