@@ -1,0 +1,46 @@
+[
+    {
+      "name": "The Tortoise and the Hare",
+      "text": [
+        "Once upon a time, a speedy hare mocked a slow-moving tortoise for being so slow.",
+        "The tortoise, tired of the hare's teasing, challenged him to a race.",
+        "The hare, overconfident, took a nap midway through, believing he had plenty of time.",
+        "But the tortoise kept going steadily, step by step.",
+        "When the hare woke up, he rushed to the finish line, only to find the tortoise had already won.",
+        "The lesson: Slow and steady wins the race."
+      ]
+    },
+    {
+      "name": "The Boy Who Cried Wolf",
+      "text": [
+        "There was once a shepherd boy who liked to play tricks.",
+        "He would shout, 'Wolf! Wolf!' and villagers would come running to help him.",
+        "When they found no wolf, he would laugh at them.",
+        "One day, a real wolf came, and the boy cried for help.",
+        "But the villagers thought it was another trick and didn't come, and the wolf ate the sheep.",
+        "The lesson: Honesty is the best policy; if you lie too often, no one will believe you when you tell the truth."
+      ]
+    },
+    {
+      "name": "The Lion and the Mouse",
+      "text": [
+        "A lion once caught a little mouse and was about to eat it.",
+        "The mouse begged for mercy, promising to help the lion one day.",
+        "The lion laughed but let the mouse go.",
+        "Later, the lion was caught in a hunter's net.",
+        "The little mouse gnawed through the ropes and set the lion free, proving that kindness is never wasted.",
+        "The lesson: No act of kindness, no matter how small, is ever wasted."
+      ]
+    },
+    {
+      "name": "The Ant and the Grasshopper",
+      "text": [
+        "All summer long, the ant worked hard storing food for winter.",
+        "Meanwhile, the grasshopper played and sang, laughing at the busy ant.",
+        "When winter came, the grasshopper had no food and was starving.",
+        "He went to the ant to beg for food.",
+        "The ant replied, 'You should have prepared for winter instead of just playing all summer.'",
+        "The lesson: It's wise to prepare for the future and not just live for the moment."
+      ]
+    }
+  ]

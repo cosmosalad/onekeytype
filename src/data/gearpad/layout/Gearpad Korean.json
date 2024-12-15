@@ -1,0 +1,47 @@
+[
+  {
+    "row": [
+      { "key": "넘패드", "x": 0, "y": 0, "fontSize": "25px" },
+      { "key": "한글", "x": 1, "y": 0, "fontSize": "25px" },
+      { "key": "영어", "x": 2, "y": 0, "fontSize": "25px" },
+      { "key": "기타", "x": 3, "y": 0, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "ㅣ", "x": 0, "y": 1.3 },
+      { "key": "ㆍ", "x": 1, "y": 1.3 },
+      { "key": "ㅡ", "x": 2, "y": 1.3 },
+      { "key": "Back Space", "x": 3, "y": 1.3, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "ㄱ", "x": 0, "y": 2.3, "doubleTap": "ㅋ", "hold": "ㄲ" },
+      { "key": "ㄴ", "x": 1, "y": 2.3, "doubleTap": "ㄹ" },
+      { "key": "ㄷ", "x": 2, "y": 2.3, "doubleTap": "ㅌ", "hold": "ㄸ" },
+      { "key": "Shift", "x": 3, "y": 2.3, "height": 2.065, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "ㅂ", "x": 0, "y": 3.3, "doubleTap": "ㅍ", "hold": "ㅃ" },
+      { "key": "ㅅ", "x": 1, "y": 3.3, "doubleTap": "ㅎ", "hold": "ㅆ" },
+      { "key": "ㅈ", "x": 2, "y": 3.3, "doubleTap": "ㅊ", "hold": "ㅉ" }
+    ]
+  },
+  {
+    "row": [
+      { "key": ". ,", "x": 0, "y": 4.3, "doubleTap": "ㅍ" },
+      { "key": "ㅇ", "x": 1, "y": 4.3, "doubleTap": "ㅁ" },
+      { "key": "/", "x": 2, "y": 4.3, "doubleTap": "!" },
+      { "key": "Enter", "x": 3, "y": 4.3, "height": 2.065, "fontSize": "25px" }
+    ]
+  },
+  {
+    "row": [
+      { "key": "Space", "x": 0, "y": 5.3, "width": 2.05, "fontSize": "25px" },
+      { "key": "Alt", "x": 2, "y": 5.3, "fontSize": "25px" }
+    ]
+  }
+]
