@@ -29,7 +29,7 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-100 p-4">
       <h1 className="text-4xl font-bold mb-8 h-16">
         <ReactTyped
-          strings={["SKEW : 한손 키보드", "SKEW : Single-handed Keyboard for People with Disabilities"]}
+          strings={["한손 키보드", "Onekey"]}
           typeSpeed={40}
           backSpeed={50}
           backDelay={10000}
